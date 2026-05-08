@@ -2963,7 +2963,7 @@ const AvailabilityManager: React.FC<AvailabilityManagerProps> = ({ doctors, avai
     try {
       const { data } = await supabaseAdmin
         .from('appointments')
-        .select('id, date, time, doctor_id, parent_name, email, phone, child_age, concerns, specialty, thematology, urgency, is_first_session, created_at, status')
+        .select('id, date, time, doctor_id, parent_name, email, phone, child_age, concerns, specialty, thematology, urgency, is_first_session, user_timezone, created_at, status')
         .gte('date', monthStart)
         .lte('date', monthEnd);
       setAppointments((data || []) as Appointment[]);
