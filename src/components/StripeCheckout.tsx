@@ -4,6 +4,7 @@ import { CreditCard, Loader, CheckCircle } from 'lucide-react';
 import { getStripe } from '../lib/stripe';
 import { getDoctorPrice, createCheckoutSession } from '../lib/stripe-api';
 import { createRealStripeCheckout } from '../lib/stripe-checkout';
+import { getUserTimezone } from '../lib/timezone';
 
 interface StripeCheckoutProps {
   doctorId: string;
@@ -95,9 +96,10 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({
     setError(null);
 
     try {
-      // Get user's IANA timezone
-      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      console.log('🌍 User timezone sent to Stripe:', userTimezone);
+      // Use the SAME timezone that drives slot display, so admin/user views stay consistent.
+      // getUserTimezone() normalizes browsers from unsupported regions to Greece.
+      const userTimezone = getUserTimezone();
+      console.log('🌍 User timezone sent to Stripe (normalized):', userTimezone);
 
       // Create REAL Stripe Checkout Session
       console.log('🚀 [INFO] Creating REAL Stripe Checkout...');
