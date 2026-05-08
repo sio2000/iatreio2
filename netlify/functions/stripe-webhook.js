@@ -120,8 +120,22 @@ async function handleCheckoutSessionCompleted(session) {
     doctor_name,
     concerns,
     amount_cents,
-    user_timezone // New: capture user_timezone from metadata
+    user_timezone, // New: capture user_timezone from metadata
+    phone: metadata_phone,
+    child_age: metadata_child_age,
+    specialty: metadata_specialty,
+    thematology: metadata_thematology,
+    urgency: metadata_urgency,
+    is_first_session: metadata_is_first_session
   } = session.metadata || {};
+
+  // Normalize new appointment fields from metadata (Stripe stringifies all values)
+  const normalizedPhone = (typeof metadata_phone === 'string' && metadata_phone.trim()) ? metadata_phone.trim() : null;
+  const normalizedChildAge = (typeof metadata_child_age === 'string' && metadata_child_age.trim()) ? metadata_child_age.trim() : null;
+  const normalizedSpecialty = (typeof metadata_specialty === 'string' && metadata_specialty.trim()) ? metadata_specialty.trim() : null;
+  const normalizedThematology = (typeof metadata_thematology === 'string' && metadata_thematology.trim()) ? metadata_thematology.trim() : null;
+  const normalizedUrgency = (typeof metadata_urgency === 'string' && metadata_urgency.trim()) ? metadata_urgency.trim() : null;
+  const normalizedIsFirstSession = metadata_is_first_session === 'true' ? true : (metadata_is_first_session === 'false' ? false : null);
 
   // Get parent_email from multiple sources with fallback
   const parent_email = session.metadata?.parent_email || 
@@ -507,7 +521,13 @@ async function handleCheckoutSessionCompleted(session) {
         email: parent_email,
         concerns: concerns || '',
         status: 'booked',
-        user_timezone: safeUserTimezone // Safe: only new Stripe bookings, null if missing/invalid
+        user_timezone: safeUserTimezone, // Safe: only new Stripe bookings, null if missing/invalid
+        phone: normalizedPhone,
+        child_age: normalizedChildAge,
+        specialty: normalizedSpecialty,
+        thematology: normalizedThematology,
+        urgency: normalizedUrgency,
+        is_first_session: normalizedIsFirstSession
       })
       .select()
       .single();
@@ -597,17 +617,17 @@ async function handleCheckoutSessionCompleted(session) {
           appointmentTime: appointment_time,
           parentName: parent_name,
           parentEmail: parent_email,
-          parentPhone: fullAppointmentData.phone || null,
-          childAge: fullAppointmentData.child_age || null,
+          parentPhone: fullAppointmentData.phone || normalizedPhone || null,
+          childAge: fullAppointmentData.child_age || normalizedChildAge || null,
           concerns: fullAppointmentData.concerns || concerns || '',
-          specialty: fullAppointmentData.specialty || null,
-          thematology: fullAppointmentData.thematology || null,
-          urgency: fullAppointmentData.urgency || null,
-          isFirstSession: fullAppointmentData.is_first_session || null
+          specialty: fullAppointmentData.specialty || normalizedSpecialty || null,
+          thematology: fullAppointmentData.thematology || normalizedThematology || null,
+          urgency: fullAppointmentData.urgency || normalizedUrgency || null,
+          isFirstSession: fullAppointmentData.is_first_session ?? normalizedIsFirstSession ?? null
         });
         console.log('✅ [DOCTOR_EMAIL] Doctor notification email sent successfully');
       } else {
-        // Fallback αν δεν μπορούμε να πάρουμε full data
+        // Fallback αν δεν μπορούμε να πάρουμε full data — χρησιμοποιούμε τα metadata
         await sendDoctorNotificationEmail({
           doctorName: finalDoctorName,
           doctorId: doctor_id,
@@ -615,13 +635,13 @@ async function handleCheckoutSessionCompleted(session) {
           appointmentTime: appointment_time,
           parentName: parent_name,
           parentEmail: parent_email,
-          parentPhone: null,
-          childAge: null,
+          parentPhone: normalizedPhone,
+          childAge: normalizedChildAge,
           concerns: concerns || '',
-          specialty: null,
-          thematology: null,
-          urgency: null,
-          isFirstSession: null
+          specialty: normalizedSpecialty,
+          thematology: normalizedThematology,
+          urgency: normalizedUrgency,
+          isFirstSession: normalizedIsFirstSession
         });
         console.log('✅ [DOCTOR_EMAIL] Doctor notification email sent successfully (with limited data)');
       }

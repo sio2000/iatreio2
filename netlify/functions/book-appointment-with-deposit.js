@@ -78,8 +78,20 @@ exports.handler = async (event) => {
       parentName,
       parentEmail,
       phone,
-      concerns
+      concerns,
+      childAge,
+      specialty,
+      thematology,
+      urgency,
+      isFirstSession
     } = payload;
+
+    // Normalize new appointment fields
+    const normalizedChildAge = (typeof childAge === 'string' && childAge.trim()) ? childAge.trim() : null;
+    const normalizedSpecialty = (typeof specialty === 'string' && specialty.trim()) ? specialty.trim() : null;
+    const normalizedThematology = (typeof thematology === 'string' && thematology.trim()) ? thematology.trim() : null;
+    const normalizedUrgency = (typeof urgency === 'string' && urgency.trim()) ? urgency.trim() : null;
+    const normalizedIsFirstSession = isFirstSession === true ? true : (isFirstSession === false ? false : null);
 
     const missing = [];
     if (!doctorId) missing.push('doctorId');
@@ -185,7 +197,12 @@ exports.handler = async (event) => {
         phone: phone || null,
         concerns: concerns || '',
         status: 'booked',
-        user_timezone: userTimezone
+        user_timezone: userTimezone,
+        child_age: normalizedChildAge,
+        specialty: normalizedSpecialty,
+        thematology: normalizedThematology,
+        urgency: normalizedUrgency,
+        is_first_session: normalizedIsFirstSession
       })
       .select()
       .single();
@@ -282,16 +299,16 @@ exports.handler = async (event) => {
           parentName: parentName,
           parentEmail: parentEmail,
           parentPhone: fullAppointmentData.phone || phone || null,
-          childAge: fullAppointmentData.child_age || null,
+          childAge: fullAppointmentData.child_age || normalizedChildAge || null,
           concerns: fullAppointmentData.concerns || concerns || '',
-          specialty: fullAppointmentData.specialty || null,
-          thematology: fullAppointmentData.thematology || null,
-          urgency: fullAppointmentData.urgency || null,
-          isFirstSession: fullAppointmentData.is_first_session || null
+          specialty: fullAppointmentData.specialty || normalizedSpecialty || null,
+          thematology: fullAppointmentData.thematology || normalizedThematology || null,
+          urgency: fullAppointmentData.urgency || normalizedUrgency || null,
+          isFirstSession: fullAppointmentData.is_first_session ?? normalizedIsFirstSession ?? null
         });
         console.log('✅ [DOCTOR_EMAIL] Doctor notification email sent successfully');
       } else {
-        // Fallback αν δεν μπορούμε να πάρουμε full data
+        // Fallback αν δεν μπορούμε να πάρουμε full data — χρησιμοποιούμε το payload
         await sendDoctorNotificationEmail({
           doctorName: finalDoctorName,
           doctorId: doctorId,
@@ -300,12 +317,12 @@ exports.handler = async (event) => {
           parentName: parentName,
           parentEmail: parentEmail,
           parentPhone: phone || null,
-          childAge: null,
+          childAge: normalizedChildAge,
           concerns: concerns || '',
-          specialty: null,
-          thematology: null,
-          urgency: null,
-          isFirstSession: null
+          specialty: normalizedSpecialty,
+          thematology: normalizedThematology,
+          urgency: normalizedUrgency,
+          isFirstSession: normalizedIsFirstSession
         });
         console.log('✅ [DOCTOR_EMAIL] Doctor notification email sent successfully (with limited data)');
       }

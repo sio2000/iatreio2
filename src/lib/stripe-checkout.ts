@@ -18,6 +18,12 @@ export interface CreateCheckoutSessionData {
   concerns: string;
   amountCents: number;
   userTimezone?: string;
+  phone?: string;
+  childAge?: string;
+  specialty?: string;
+  thematology?: string;
+  urgency?: string;
+  isFirstSession?: boolean;
   sessionsCount?: number; // Optional: for deposit purchases
   scheduleDetails?: Array<{ date: string; time: string }>;
   manualSessionsLabel?: string;
@@ -142,7 +148,13 @@ export const createRealStripeCheckout = async (data: CreateCheckoutSessionData) 
             manualDepositData: data.manualDepositData || null,
             scheduleDetails: Array.isArray(data.scheduleDetails) ? data.scheduleDetails : null,
             manualSessionsLabel: data.manualSessionsLabel || null,
-            user_timezone: data.userTimezone || null // Pass to backend
+            user_timezone: data.userTimezone || null, // Pass to backend
+            phone: data.phone || '',
+            childAge: data.childAge || '',
+            specialty: data.specialty || '',
+            thematology: data.thematology || '',
+            urgency: data.urgency || '',
+            isFirstSession: data.isFirstSession === true
           };
           
           console.log('🔍 [DEBUG] === FRONTEND: Sending to Netlify Function ===');

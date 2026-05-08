@@ -284,7 +284,9 @@ const DepositScheduler: React.FC<DepositSchedulerProps> = ({
       appointmentTime: selectedTime,
       parentName,
       parentEmail,
-      phone: parentPhone
+      phone: parentPhone,
+      specialty: selectedDoctor.specialty || '',
+      userTimezone: timezone
     };
 
     try {

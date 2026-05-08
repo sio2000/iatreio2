@@ -2355,39 +2355,34 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
                         parentName={formData.parentName}
                         parentEmail={formData.email}
                         appointmentDate={formData.appointmentDate}
-                        appointmentTime={(() => {
-                          // Μετατρέπουμε το selectedTime από timezone πελάτη σε timezone γιατρού
-                          const selectedDoctor = doctors.find(d => d.id === selectedDoctorId);
-                          const doctorTimezone = getDoctorTimezone(selectedDoctor?.name);
-                          const patientTimezone = getUserTimezone();
-                          
-                          console.log('[Contact] Converting appointment time before save:', {
-                            selectedTime,
-                            patientTimezone,
-                            doctorTimezone,
-                            doctorName: selectedDoctor?.name,
-                            date: formData.appointmentDate
-                          });
-                          
-                          // Αν είναι ήδη στην ίδια timezone, δεν χρειάζεται μετατροπή
-                          if (doctorTimezone === patientTimezone) {
-                            console.log('[Contact] Same timezone, no conversion needed');
-                            return selectedTime;
-                          }
-                          // Μετατροπή στη timezone του γιατρού
-                          const converted = convertTimeToTimezone(
-                            formData.appointmentDate,
-                            selectedTime,
-                            patientTimezone,
-                            doctorTimezone
-                          ).slice(0, 5); // HH:MM format
-                          console.log('[Contact] Converted appointment time:', {
-                            from: selectedTime,
-                            to: converted
-                          });
-                          return converted;
-                        })()}
+                        appointmentTime={selectedTime}
                         concerns={formData.message}
+                        phone={formData.phone}
+                        childAge={formData.childAge}
+                        specialty={(() => {
+                          const specialtyLabelMap: { [key: string]: string } = {
+                            psychiatrist: 'Ψυχίατρος Παιδιού και Εφήβου & Ψυχοθεραπεύτρια',
+                            psychologist: 'Ψυχολόγος',
+                            clinicalPsychologist: 'Κλινική Παιδοψυχολόγος & Ψυχοθεραπεύτρια'
+                          };
+                          return specialtyLabelMap[selectedSpecialty] || '';
+                        })()}
+                        thematology={(() => {
+                          const grThematologyLabels: { [key: string]: string } = {
+                            firstSession: 'Πρώτη συνεδρία (Συζήτηση παραπομπής & ιστορικού ασθενούς)',
+                            parentCounseling: 'Συμβουλευτική γονέων',
+                            childExamPsychologist: 'Εξέταση παιδιού από ψυχολόγο',
+                            childExamPsychiatrist: 'Εξέταση παιδιού από παιδοψυχίατρο',
+                            childTherapyPsychiatrist: 'Ψυχοθεραπεία παιδιού με παιδοψυχίατρο',
+                            childTherapyPsychologist: 'Ψυχοθεραπεία παιδιού με ψυχολόγο',
+                            supervision: 'Εποπτεία ειδικών',
+                            medicationAdjustment: 'Φαρμακευτική ρύθμιση',
+                            scientificSupervision: 'Επιστημονική επιμέλεια βιβλίου/site/παιχνιδιού'
+                          };
+                          return grThematologyLabels[selectedThematology] || '';
+                        })()}
+                        urgency=""
+                        isFirstSession={formData.isFirstSession === 'yes'}
                         onSuccess={() => {
                           setShowStripeCheckout(false);
                           // Reset form

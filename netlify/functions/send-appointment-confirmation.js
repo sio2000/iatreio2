@@ -144,59 +144,23 @@ exports.handler = async (event) => {
     }
 
 
-    // DST-safe, IANA-correct local date/time rendering
-    function formatDateTime(dateStr, timeStr, tz) {
+    // Render saved appointment time exactly as picked by the user.
+    // The booking flow stores `time` and `date` already in the user's local timezone
+    // (`user_timezone` is saved alongside as metadata), so no UTC re-interpretation is needed.
+    function formatDateTime(dateStr, timeStr) {
       if (!dateStr || !timeStr) return { date: '', time: '' };
-      // Compose ISO string in UTC
-      const [year, month, day] = dateStr.split('-');
-      const [hour, minute] = timeStr.split(':');
-      // Use Date.UTC to avoid local timezone offset
-      const utcDate = new Date(Date.UTC(
-        parseInt(year),
-        parseInt(month) - 1,
-        parseInt(day),
-        parseInt(hour),
-        parseInt(minute)
-      ));
-      // Use Intl.DateTimeFormat with tz if valid
-      let date = '', time = '';
-      try {
-        if (tz && typeof tz === 'string') {
-          const dtf = new Intl.DateTimeFormat('el-GR', {
-            timeZone: tz,
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-          });
-          const parts = dtf.formatToParts(utcDate);
-          const d = {
-            day: parts.find(p => p.type === 'day')?.value,
-            month: parts.find(p => p.type === 'month')?.value,
-            year: parts.find(p => p.type === 'year')?.value
-          };
-          date = `${d.day}/${d.month}/${d.year}`;
-          // Time
-          const tf = new Intl.DateTimeFormat('el-GR', {
-            timeZone: tz,
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false
-          });
-          time = tf.format(utcDate);
-        } else {
-          // Fallback: legacy formatting
-          date = `${day}/${month}/${year}`;
-          time = timeStr.substring(0, 5);
-        }
-      } catch (e) {
-        // Fallback: legacy formatting
-        date = `${day}/${month}/${year}`;
-        time = timeStr.substring(0, 5);
-      }
+      const dateParts = String(dateStr).split('-');
+      const date = dateParts.length === 3
+        ? `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`
+        : String(dateStr);
+      // Take only HH:MM from "HH:MM" or "HH:MM:SS"
+      const time = String(timeStr).substring(0, 5);
       return { date, time };
     }
 
-    const { date: formattedDate, time: formattedTime } = formatDateTime(appointmentDate, appointmentTime, userTimezone);
+    const { date: formattedDate, time: formattedTime } = formatDateTime(appointmentDate, appointmentTime);
+    // userTimezone is intentionally not used for rendering — kept for future logging/diagnostics
+    void userTimezone;
 
     // Δημιουργία email body
     const emailBody = `Καλωσορίσατε,

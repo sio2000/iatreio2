@@ -7,6 +7,12 @@ export interface DepositBookingPayload {
   parentEmail: string;
   phone?: string;
   concerns?: string;
+  childAge?: string;
+  specialty?: string;
+  thematology?: string;
+  urgency?: string;
+  isFirstSession?: boolean;
+  userTimezone?: string;
 }
 
 interface DepositBookingResponse {

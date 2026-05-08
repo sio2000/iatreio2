@@ -13,6 +13,12 @@ interface StripeCheckoutProps {
   appointmentDate: string;
   appointmentTime: string;
   concerns: string;
+  phone?: string;
+  childAge?: string;
+  specialty?: string;
+  thematology?: string;
+  urgency?: string;
+  isFirstSession?: boolean;
   onSuccess?: () => void;
   onError?: (error: string) => void;
   language: 'gr' | 'en' | 'fr';
@@ -26,6 +32,12 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({
   appointmentDate,
   appointmentTime,
   concerns,
+  phone,
+  childAge,
+  specialty,
+  thematology,
+  urgency,
+  isFirstSession,
   onSuccess,
   onError,
   language
@@ -99,7 +111,13 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({
         appointmentTime,
         concerns,
         amountCents: price,
-        userTimezone // Pass to backend
+        userTimezone, // Pass to backend
+        phone,
+        childAge,
+        specialty,
+        thematology,
+        urgency,
+        isFirstSession
       });
 
       // If we reach here, the redirect to Stripe should have happened

@@ -90,7 +90,13 @@ exports.handler = async (event, context) => {
       scheduleDetails: scheduleDetailsFromBody,
       manualSessionsLabel,
       manualDepositData,
-      user_timezone // New: from frontend
+      user_timezone, // New: from frontend
+      phone,
+      childAge,
+      specialty,
+      thematology,
+      urgency,
+      isFirstSession
     } = body;
 
     // TEMP DEBUG LOG
@@ -447,7 +453,13 @@ exports.handler = async (event, context) => {
           schedule_details_json: normalizedScheduleDetails.length ? JSON.stringify(normalizedScheduleDetails) : '',
           manual_sessions_label: manualSessionsLabel || '',
           manual_deposit_data: manualDepositData ? JSON.stringify(manualDepositData) : '',
-          user_timezone: user_timezone || null // New: pass to Stripe metadata
+          user_timezone: user_timezone || null, // New: pass to Stripe metadata
+          phone: phone || '',
+          child_age: childAge || '',
+          specialty: specialty || '',
+          thematology: thematology || '',
+          urgency: urgency || '',
+          is_first_session: isFirstSession ? 'true' : 'false'
         },
       };
       console.log('🔍 [CHECKOUT] Session data about to send to Stripe:', JSON.stringify(sessionData, null, 2));
