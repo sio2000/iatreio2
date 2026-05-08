@@ -308,7 +308,7 @@ export function convertTimeToTimezone(
  */
 export function getDoctorTimezone(doctorName?: string | null): string {
   if (!doctorName) {
-    return TIMEZONES.GREECE;
+    return TIMEZONES.SWITZERLAND;
   }
   
   // Ελέγχουμε αν ο γιατρός είναι στη λίστα γιατρών από Ελβετία
@@ -327,6 +327,6 @@ export function getDoctorTimezone(doctorName?: string | null): string {
     return TIMEZONES.SWITZERLAND;
   }
   
-  // Default: Ελλάδα (Athens) — οι γιατροί του ιατρείου λειτουργούν με ώρα Ελλάδας
-  return TIMEZONES.GREECE;
+  // Default: Ελβετία (Zurich) για το admin πρόγραμμα ιατρείου
+  return TIMEZONES.SWITZERLAND;
 }

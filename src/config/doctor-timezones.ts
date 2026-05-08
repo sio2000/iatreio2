@@ -4,8 +4,23 @@
  */
 
 export const DOCTORS_IN_SWITZERLAND: Set<string> = new Set([
-  // Προσθέστε εδώ τα ονόματα των γιατρών από Ελβετία
-  // Παράδειγμα: 'Όνομα Γιατρού'
+  // Όλοι οι γιατροί του admin προγράμματος λειτουργούν με ώρα Ελβετίας.
+  'Dr. Άννα Μαρία Φύτρου',
+  'Dr. Anna-Maria Fytrou',
+  'Dr. Anna Maria Fytrou',
+  'Δρ. Άννα Μαρία Φύτρου',
+  'Δρ. Άννα-Μαρία Φύτρου',
+  'Άννα Μαρία Φύτρου',
+  'Άννα-Μαρία Φύτρου',
+  'Ιωάννα Πισσάρη',
+  'Ioanna Pissari',
+  'Σοφία Σπυριάδου',
+  'Sofia Spyriadou',
+  'Ειρήνη Στεργίου',
+  'Eirini Stergiou',
+  'Μαρία Κ. Δημητριάδου',
+  'Maria K. Dimitriadou',
+  'Maria Dimitriadou'
 ]);
 
 /**
