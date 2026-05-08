@@ -12,6 +12,10 @@ import analytikiVeveosiStergiou from '../assets/Αναλυτική Βεβαίω�
 import metaptychiakoEkseliktikisSxolikis from '../assets/ΜΕΤΑΠΤΥΧΙΑΚΟ ΕΞΕΛΙΚΤΙΚΗΣ ΣΧΟΛΙΚΗΣ ΨΥΧΟΛΟΓΙΑΣ.png';
 import metaptychiakoEfarmoges from '../assets/ΜΕΤΑΠΤΥΧΙΑΚΟ ΕΦΑΡΜΟΓΕΣ ΤΗΣ ΨΥΧΟΛΟΓΙΑΣ ΣΤΗΝ ΥΓΕΙΑ.png';
 import ptychioPsychologias from '../assets/ΠΤΥΧΙΟ ΨΥΧΟΛΟΓΙΑΣ.png';
+import mariaPtychio from '../assets/Μαρία Κ. Δημητριάδουπτυχίο (1).png';
+import mariaMetaptychiako from '../assets/Μαρία Κ. ΔημητριάδουΜεταπτυχιακο (1).png';
+import mariaAdeiaAskiseos from '../assets/Μαρία Κ. ΔημητριάδουΑΔΕΙΑΑΣΚΗΣΕΩΣ (1).png';
+import mariaVeveosi from '../assets/Μαρία Κ. Δημητριάδουβεβαιωση (1).png';
 
 interface TeamMembersProps {
   language: string;
@@ -60,6 +64,14 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ language }) => {
         metaptychiakoEfarmoges,
         certificatSystemique,
         analytikiVeveosiStergiou
+      ]);
+    } else if (memberId === 4) {
+      // Maria K. Dimitriadou
+      setSelectedPDFs([
+        mariaPtychio,
+        mariaMetaptychiako,
+        mariaAdeiaAskiseos,
+        mariaVeveosi
       ]);
     }
   };
@@ -112,6 +124,22 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ language }) => {
 Είναι η ιδανική ειδικός για **Εξέταση και Ψυχοθεραπεία παιδιών και εφήβων και για Συμβουλευτική γονέων**.
 
 Η **αναπτυξιακή παιδοψυχολόγος μιλάει άψογα ελληνικά και γαλλικά**.`
+      },
+      {
+        id: 4,
+        name: 'Μαρία Κ. Δημητριάδου',
+        image: '/maria_dimitriadou.jpg',
+        bio: `Η κυρία Δημητριάδου ολοκλήρωσε τις σπουδές της στην Ψυχολογίας στο Αριστοτέλειο Πανεπιστήμιο Θεσσαλονίκης και ακολούθησε το **Μεταπτυχιακό Πρόγραμμα Σπουδών στην Κλινική Ψυχική Υγεία** στην Ιατρική Σχολή του ίδιου Πανεπιστημίου.
+
+Είναι **υποψήφια διδάκτωρ (PhDc)** στο Πανεπιστήμιο Δυτικής Μακεδονίας και έχει εκπαιδευτεί στη **Γνωστική Συμπεριφορική Θεραπεία**.
+
+Το κλινικό της ενδιαφέρον εστιάζει κυρίως στην υποστήριξη ενηλίκων και εφήβων, με **αγχώδη διαταραχή, κρίσεις πανικού, συναισθηματικές διαταραχές (κατάθλιψη, πένθος, δυσθυμία)** και **διατροφικές διαταραχές**. Έχει εκπαιδευτεί στην αντιμετώπιση ασθενών με **χρόνια σωματική νόσο** και με **επαγγελματική εξουθένωση (burn out)**.
+
+Μέσα από την πολυετή ενασχόλησή της με ευάλωτες κοινωνικές ομάδες δημιουργεί εξατομικευμένα προγράμματα ενδυνάμωσης νέων, με την προσέγγιση της να βασίζεται στην κλινική γνώση και την ενσυναίσθηση. Στόχος της είναι η εξατομικευμένη φροντίδα, η ενίσχυση της αυτοεκτίμησης και η καλλιέργεια της ψυχικής ανθεκτικότητας.
+
+Είναι η ιδανική ειδικός για τη **Πρώτη Συνεδρία των γονέων** με το Ιατρείο μας, την **Εξέταση-Ψυχοθεραπεία εφήβων** και **Συμβουλευτική γονέων εφήβων**.
+
+Η κλινική παιδοψυχολόγος μιλάει **άψογα ελληνικά**.`
       }
     ],
     en: [
@@ -156,6 +184,22 @@ She has intense scientific activity, currently at the **"Hôpital Du Jura"** Hos
 She is the ideal specialist for **Examination and Psychotherapy of children and adolescents and for Parent Counseling**.
 
 The **developmental child psychologist speaks fluent Greek and French**.`
+      },
+      {
+        id: 4,
+        name: 'Maria K. Dimitriadou',
+        image: '/maria_dimitriadou.jpg',
+        bio: `Ms. Dimitriadou completed her studies in Psychology at Aristotle University of Thessaloniki and followed the **Master's Program in Clinical Mental Health** at the Medical School of the same University.
+
+She is a **PhD candidate (PhDc)** at the University of Western Macedonia and has been trained in **Cognitive Behavioral Therapy**.
+
+Her clinical interest focuses mainly on the support of adults and adolescents with **anxiety disorder, panic attacks, emotional disorders (depression, grief, dysthymia)** and **eating disorders**. She has been trained in the management of patients with **chronic somatic illness** and **professional burnout (burn out)**.
+
+Through her many years of involvement with vulnerable social groups, she creates individualized empowerment programs for young people, with her approach based on clinical knowledge and empathy. Her goal is individualized care, the strengthening of self-esteem and the cultivation of mental resilience.
+
+She is the ideal specialist for the **First Parent Session** with our Clinic, the **Examination and Psychotherapy of adolescents** and **Counseling for parents of adolescents**.
+
+The clinical child psychologist speaks **fluent Greek**.`
       }
     ],
     fr: [
@@ -200,6 +244,22 @@ Elle a une activité scientifique intense, actuellement à l'Hôpital **"Hôpita
 Elle est la spécialiste idéale pour l'**Examen et Psychothérapie des enfants et adolescents et pour le Conseil Parental**.
 
 La **psychologue du développement pour enfants parle couramment le grec et le français**.`
+      },
+      {
+        id: 4,
+        name: 'Maria K. Dimitriadou',
+        image: '/maria_dimitriadou.jpg',
+        bio: `Mme Dimitriadou a terminé ses études en Psychologie à l'Université Aristote de Thessalonique et a suivi le **Programme de Master en Santé Mentale Clinique** à la Faculté de Médecine de la même Université.
+
+Elle est **doctorante (PhDc)** à l'Université de Macédoine Occidentale et a été formée en **Thérapie Cognitivo-Comportementale**.
+
+Son intérêt clinique se concentre principalement sur le soutien des adultes et des adolescents souffrant de **troubles anxieux, crises de panique, troubles émotionnels (dépression, deuil, dysthymie)** et **troubles alimentaires**. Elle a été formée à la prise en charge des patients atteints de **maladie somatique chronique** et de **burn-out professionnel (burn out)**.
+
+À travers ses nombreuses années d'engagement auprès de groupes sociaux vulnérables, elle crée des programmes individualisés de renforcement pour les jeunes, son approche reposant sur la connaissance clinique et l'empathie. Son objectif est la prise en charge personnalisée, le renforcement de l'estime de soi et la culture de la résilience psychologique.
+
+Elle est la spécialiste idéale pour la **Première Session Parentale** avec notre Clinique, l'**Examen-Psychothérapie des adolescents** et le **Conseil aux parents d'adolescents**.
+
+La psychologue clinique pour enfants parle **couramment le grec**.`
       }
     ]
   };
@@ -343,7 +403,7 @@ La **psychologue du développement pour enfants parle couramment le grec et le f
           </div>
         </motion.div>
 
-        {/* Τρίτο βιογραφικό - Ειρήνη Στεργίου - Οριζόντια διάταξη */}
+        {/* Δεύτερο πλαίσιο - Μαρία Κ. Δημητριάδου & Ειρήνη Στεργίου - ίδια διάταξη με το πάνω */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -351,84 +411,127 @@ La **psychologue du développement pour enfants parle couramment le grec et le f
           viewport={{ once: true }}
           className="bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 overflow-hidden"
         >
-          <div className="flex flex-col lg:flex-row">
-            {/* Εικόνα στα αριστερά */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="w-full lg:w-1/3 h-80 sm:h-96 md:h-[28rem] lg:h-auto overflow-hidden bg-gray-50 flex items-center justify-center"
-            >
-              <img
-                src={teamMembers[lang][2].image}
-                alt={teamMembers[lang][2].name}
-                className="w-full h-full object-cover object-top sm:object-[center_top] md:object-[center_top] lg:object-[center_top] sm:scale-100 md:scale-110 lg:scale-100"
-                style={{ objectPosition: 'center top' }}
-              />
-            </motion.div>
-
-            {/* Περιεχόμενο στα δεξιά */}
-            <div className="w-full lg:w-2/3 p-8">
-              {/* Όνομα */}
-              <motion.h3
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true }}
-                className="text-center lg:text-left text-xl md:text-2xl font-bold text-gray-800 mb-6"
-              >
-                <span className="underline">{teamMembers[lang][2].name}</span>
-              </motion.h3>
-              
-              {/* Βιογραφικό κείμενο */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                viewport={{ once: true }}
-                className="space-y-4"
-              >
-                {teamMembers[lang][2].bio.split('\n\n').map((paragraph: string, pIndex: number) => (
-                  <p
-                    key={pIndex}
-                    className="text-gray-700 leading-relaxed text-sm text-justify"
-                    dangerouslySetInnerHTML={{
-                      __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-black">$1</span>')
-                    }}
-                  />
-                ))}
-              </motion.div>
-
-              {/* Διακοσμητική γραμμή κάτω */}
-              <motion.div 
-                initial={{ opacity: 0, scaleX: 0 }}
-                whileInView={{ opacity: 1, scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                viewport={{ once: true }}
-                className="mt-6 flex justify-center lg:justify-start"
-              >
-                <div className="w-16 h-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full"></div>
-              </motion.div>
-
-              {/* Κουμπί Προβολή Πτυχίου/Εκπαιδεύσεων για Ειρήνη Στεργίου (id: 3) */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.0 }}
-                viewport={{ once: true }}
-                className="mt-6 flex justify-center lg:justify-start"
-              >
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => handleViewCertificates(3)}
-                  className="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 text-gray-700 px-6 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all duration-300 font-quicksand border border-white/50"
-                >
-                  {content[lang].viewButton}
-                </motion.button>
-              </motion.div>
+          {/* Δύο εικόνες δίπλα-δίπλα στο πάνω μέρος */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="relative w-full max-w-4xl mx-auto h-[20rem] sm:h-[25rem] md:h-[30rem] lg:h-[38rem] xl:h-[40rem] 2xl:h-[42rem] lg:max-w-3xl overflow-hidden bg-gray-50 flex items-center justify-center"
+          >
+            <div className="grid grid-cols-2 w-full h-full relative">
+              {/* Εικόνα Μαρίας στα αριστερά */}
+              <div className="w-full h-full relative overflow-hidden">
+                <img
+                  src={teamMembers[lang][3].image}
+                  alt={teamMembers[lang][3].name}
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/20"></div>
+              </div>
+              {/* Εικόνα Ειρήνης στα δεξιά */}
+              <div className="w-full h-full relative overflow-hidden">
+                <img
+                  src={teamMembers[lang][2].image}
+                  alt={teamMembers[lang][2].name}
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/20"></div>
+              </div>
+              {/* Κάθετη γραμμή ανάμεσα στις δύο εικόνες */}
+              <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-white/70 shadow-[0_0_8px_rgba(255,255,255,0.6)]"></div>
             </div>
+
+            {/* Διακοσμητικό περίγραμμα */}
+            <div className="absolute inset-0 border-4 border-white/30 rounded-t-2xl pointer-events-none"></div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-0">
+            {[teamMembers[lang][3], teamMembers[lang][2]].map((member: any, index: number) => (
+              <div key={member.id} className={`p-4 sm:p-8 ${index === 0 ? 'lg:pr-6' : 'lg:pl-6'} relative`}>
+                {/* Όνομα */}
+                <motion.h3
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 + index * 0.3 }}
+                  viewport={{ once: true }}
+                  className="text-center text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-6"
+                >
+                  <span className="underline">{member.name}</span>
+                </motion.h3>
+
+                {/* Βιογραφικό κείμενο */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 + index * 0.3 }}
+                  viewport={{ once: true }}
+                  className="space-y-4"
+                >
+                  {member.bio.split('\n\n').map((paragraph: string, pIndex: number) => (
+                    <p
+                      key={pIndex}
+                      className="text-gray-700 leading-relaxed text-xs sm:text-sm text-justify"
+                      dangerouslySetInnerHTML={{
+                        __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-black">$1</span>')
+                      }}
+                    />
+                  ))}
+                </motion.div>
+
+                {/* Διακοσμητική γραμμή κάτω */}
+                <motion.div
+                  initial={{ opacity: 0, scaleX: 0 }}
+                  whileInView={{ opacity: 1, scaleX: 1 }}
+                  transition={{ duration: 0.8, delay: 0.8 + index * 0.3 }}
+                  viewport={{ once: true }}
+                  className="mt-6 flex justify-center"
+                >
+                  <div className="w-16 h-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full"></div>
+                </motion.div>
+
+                {/* Κουμπί Προβολή Πτυχίου/Εκπαιδεύσεων - για Μαρία (id:4) και Ειρήνη (id:3) */}
+                {(member.id === 3 || member.id === 4) && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 1.0 + index * 0.3 }}
+                    viewport={{ once: true }}
+                    className="mt-6 flex justify-center"
+                  >
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => handleViewCertificates(member.id)}
+                      className="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 text-gray-700 px-6 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all duration-300 font-quicksand border border-white/50"
+                    >
+                      {content[lang].viewButton}
+                    </motion.button>
+                  </motion.div>
+                )}
+
+                {/* Διαχωριστική γραμμή ανάμεσα στα κείμενα (μόνο για το δεύτερο βιογραφικό) */}
+                {index === 1 && (
+                  <motion.div
+                    initial={{ opacity: 0, scaleY: 0 }}
+                    whileInView={{ opacity: 1, scaleY: 1 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    viewport={{ once: true }}
+                    className="hidden lg:block absolute left-0 top-8 bottom-8 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent"
+                  >
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                        className="w-6 h-6 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center"
+                      >
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            ))}
           </div>
         </motion.div>
 
@@ -467,11 +570,19 @@ La **psychologue du développement pour enfants parle couramment le grec et le f
               <div className="space-y-4">
                 {selectedPDFs.map((image, imageIndex) => (
                   <div key={imageIndex} className="border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
-                    <img
-                      src={image}
-                      alt={`Certificate ${imageIndex + 1}`}
-                      className="w-full h-auto object-contain"
-                    />
+                    {image.toLowerCase().endsWith('.pdf') ? (
+                      <iframe
+                        src={image}
+                        title={`Certificate PDF ${imageIndex + 1}`}
+                        className="w-full h-[70vh] min-h-[500px]"
+                      />
+                    ) : (
+                      <img
+                        src={image}
+                        alt={`Certificate ${imageIndex + 1}`}
+                        className="w-full h-auto object-contain"
+                      />
+                    )}
                   </div>
                 ))}
               </div>

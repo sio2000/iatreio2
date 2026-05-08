@@ -17,6 +17,7 @@ import UserPanel from './pages/UserPanel';
 import EiriniPanel from './components/EiriniPanel';
 import IoannaPanel from './components/IoannaPanel';
 import SofiaPanel from './components/SofiaPanel';
+import MariaPanel from './components/MariaPanel';
 import PaymentSuccessPopup from './components/PaymentSuccessPopup';
 import { usePaymentSuccess } from './hooks/usePaymentSuccess';
 
@@ -51,6 +52,8 @@ function App() {
       setCurrentPage('ioanna');
     } else if (path === '/sofia' || path === '/sofia/') {
       setCurrentPage('sofia');
+    } else if (path === '/maria' || path === '/maria/') {
+      setCurrentPage('maria');
     }
   }, []);
 
@@ -86,6 +89,8 @@ function App() {
         return <IoannaPanel language={language} onLogout={() => setCurrentPage('home')} />;
       case 'sofia':
         return <SofiaPanel language={language} onLogout={() => setCurrentPage('home')} />;
+      case 'maria':
+        return <MariaPanel language={language} onLogout={() => setCurrentPage('home')} />;
       default:
         return (
           <>

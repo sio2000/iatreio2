@@ -84,7 +84,7 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
         'childTherapyPsychiatrist'
       ];
     } else if (selectedSpecialty === 'psychologist') {
-      // Για Παιδοψυχολόγο & Ψυχοθεραπεύτρια: όλες οι υπόλοιπες
+      // Για Ψυχολόγο: όλες οι υπόλοιπες
       return [
         'firstSession',
         'parentCounseling',
@@ -116,7 +116,7 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
     if (!selectedSpecialty) return true;
     const specialtyMap: { [key: string]: string } = {
       'psychiatrist': 'Ψυχίατρος Παιδιού και Εφήβου & Ψυχοθεραπεύτρια',
-      'psychologist': 'Παιδοψυχολόγος & Ψυχοθεραπεύτρια',
+      'psychologist': 'Ψυχολόγος',
       'clinicalPsychologist': 'Κλινική Παιδοψυχολόγος & Ψυχοθεραπεύτρια'
     };
     return doctor.specialty === specialtyMap[selectedSpecialty];
@@ -193,12 +193,13 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
         'Dr. Άννα Μαρία Φύτρου': 'Dr. Anna-Maria Fytrou', // Alternative format
         'Σοφία Σπυριάδου': 'Sofia Spyriadou',
         'Ιωάννα Πισσάρη': 'Ioanna Pissari',
-        'Ειρήνη Στεργίου': 'Eirini Stergiou'
+        'Ειρήνη Στεργίου': 'Eirini Stergiou',
+        'Μαρία Κ. Δημητριάδου': 'Maria K. Dimitriadou'
       };
 
       const specialtyMap: { [key: string]: string } = {
         'Ψυχίατρος Παιδιού και Εφήβου & Ψυχοθεραπεύτρια': 'Child and Adolescent Psychiatrist & Psychotherapist',
-        'Παιδοψυχολόγος & Ψυχοθεραπεύτρια': 'Child Psychologist & Psychotherapist',
+        'Ψυχολόγος': 'Psychologist',
         'Κλινική Παιδοψυχολόγος & Ψυχοθεραπεύτρια': 'Clinical Child Psychologist & Psychotherapist'
       };
 
@@ -213,12 +214,13 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
         'Dr. Άννα Μαρία Φύτρου': 'Dr. Anna-Maria Fytrou', // Alternative format
         'Σοφία Σπυριάδου': 'Sofia Spyriadou',
         'Ιωάννα Πισσάρη': 'Ioanna Pissari',
-        'Ειρήνη Στεργίου': 'Eirini Stergiou'
+        'Ειρήνη Στεργίου': 'Eirini Stergiou',
+        'Μαρία Κ. Δημητριάδου': 'Maria K. Dimitriadou'
       };
 
       const specialtyMap: { [key: string]: string } = {
         'Ψυχίατρος Παιδιού και Εφήβου & Ψυχοθεραπεύτρια': 'Psychiatre pour Enfants et Adolescents & Psychothérapeute',
-        'Παιδοψυχολόγος & Ψυχοθεραπεύτρια': 'Psychologue pour Enfants & Psychothérapeute',
+        'Ψυχολόγος': 'Psychologue',
         'Κλινική Παιδοψυχολόγος & Ψυχοθεραπεύτρια': 'Psychologue Clinique pour Enfants & Psychothérapeute'
       };
 
@@ -609,7 +611,7 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
       selectSpecialty: 'Επιλέξτε ειδικότητα',
       specialtyOptions: {
         psychiatrist: 'Ψυχίατρος Παιδιού και Εφήβου & Ψυχοθεραπεύτρια',
-        psychologist: 'Παιδοψυχολόγος & Ψυχοθεραπεύτρια',
+        psychologist: 'Ψυχολόγος',
         clinicalPsychologist: 'Κλινική Παιδοψυχολόγος & Ψυχοθεραπεύτρια'
       },
       thematologies: 'Θεματολογίες',
@@ -728,7 +730,7 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
       selectSpecialty: 'Select specialty',
       specialtyOptions: {
         psychiatrist: 'Child and Adolescent Psychiatrist & Psychotherapist',
-        psychologist: 'Child Psychologist & Psychotherapist',
+        psychologist: 'Psychologist',
         clinicalPsychologist: 'Clinical Child Psychologist & Psychotherapist'
       },
       thematologies: 'Thematologies',
@@ -846,7 +848,7 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
       selectSpecialty: 'Sélectionnez une spécialité',
       specialtyOptions: {
         psychiatrist: 'Psychiatre pour Enfants et Adolescents & Psychothérapeute',
-        psychologist: 'Psychologue pour Enfants & Psychothérapeute',
+        psychologist: 'Psychologue',
         clinicalPsychologist: 'Psychologue Clinique pour Enfants & Psychothérapeute'
       },
       thematologies: 'Thématiques',
@@ -959,26 +961,31 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
         return doctor.active === true;
       });
 
-      // Ταξινόμηση: Σοφία πρώτη, μετά Ιωάννα, μετά οι υπόλοιποι
+      // Ταξινόμηση για την κατηγορία «Κλινική Παιδοψυχολόγος & Ψυχοθεραπεύτρια»:
+      // 1) Μαρία Κ. Δημητριάδου, 2) Ιωάννα Πισσάρη, 3) Σοφία Σπυριάδου, μετά οι υπόλοιποι αλφαβητικά.
       const sortedDoctors = allowedDoctors.sort((a: Doctor, b: Doctor) => {
         const nameA = normalizeDoctorName(a.name || '');
         const nameB = normalizeDoctorName(b.name || '');
-        
-        const isSofiaA = nameA.includes('σοφια') || nameA.includes('spyriadou');
-        const isSofiaB = nameB.includes('σοφια') || nameB.includes('spyriadou');
+
+        const isMariaA = nameA.includes('δημητριαδου') || nameA.includes('dimitriadou');
+        const isMariaB = nameB.includes('δημητριαδου') || nameB.includes('dimitriadou');
         const isIoannaA = nameA.includes('ιωαννα') || nameA.includes('pissari');
         const isIoannaB = nameB.includes('ιωαννα') || nameB.includes('pissari');
-        
-        // Σοφία πρώτη
-        if (isSofiaA && !isSofiaB) return -1;
-        if (!isSofiaA && isSofiaB) return 1;
-        
-        // Ιωάννα δεύτερη (μόνο αν δεν είναι Σοφία)
-        if (!isSofiaA && !isSofiaB) {
-          if (isIoannaA && !isIoannaB) return -1;
-          if (!isIoannaA && isIoannaB) return 1;
-        }
-        
+        const isSofiaA = nameA.includes('σοφια') || nameA.includes('spyriadou');
+        const isSofiaB = nameB.includes('σοφια') || nameB.includes('spyriadou');
+
+        const rank = (isMaria: boolean, isIoanna: boolean, isSofia: boolean) => {
+          if (isMaria) return 0;
+          if (isIoanna) return 1;
+          if (isSofia) return 2;
+          return 3;
+        };
+
+        const rankA = rank(isMariaA, isIoannaA, isSofiaA);
+        const rankB = rank(isMariaB, isIoannaB, isSofiaB);
+
+        if (rankA !== rankB) return rankA - rankB;
+
         // Υπόλοιποι αλφαβητικά
         return nameA.localeCompare(nameB);
       });

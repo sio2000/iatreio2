@@ -17,6 +17,9 @@ const DOCTOR_EMAILS = {
   'Sofia Spyriadou': 'sofiasprd@icloud.com',
   'Ειρήνη Στεργίου': 'eirini.ster88@gmail.com',
   'Eirini Stergiou': 'eirini.ster88@gmail.com',
+  'Μαρία Κ. Δημητριάδου': 'dimitriadoumaria00@gmail.com',
+  'Maria K. Dimitriadou': 'dimitriadoumaria00@gmail.com',
+  'Maria Dimitriadou': 'dimitriadoumaria00@gmail.com',
   // Dr. Φύτρου - όλες οι παραλλαγές
   'Dr. Άννα Μαρία Φύτρου': 'iatreiodrfytrou@gmail.com',
   'Dr. Anna-Maria Fytrou': 'iatreiodrfytrou@gmail.com',
@@ -163,6 +166,12 @@ exports.handler = async (event) => {
         doctorEmail = 'eirini.ster88@gmail.com';
         console.log(`✅ [DOCTOR_EMAIL] Found email via partial match for Eirini Stergiou: ${doctorEmail}`);
       }
+      // Partial match για Μαρία Κ. Δημητριάδου
+      else if (nameLower.includes('dimitriadou') || nameLower.includes('δημητριάδου') ||
+               nameLower.includes('maria k') || nameLower.includes('μαρία κ')) {
+        doctorEmail = 'dimitriadoumaria00@gmail.com';
+        console.log(`✅ [DOCTOR_EMAIL] Found email via partial match for Maria K. Dimitriadou: ${doctorEmail}`);
+      }
     }
     
     if (!doctorEmail) {
@@ -240,6 +249,8 @@ exports.handler = async (event) => {
         panelUrl = 'https://onlineparentteenclinic.com/sofia';
       } else if (doctorName === 'Ειρήνη Στεργίου' || doctorName === 'Eirini Stergiou') {
         panelUrl = 'https://onlineparentteenclinic.com/eirini';
+      } else if (doctorName === 'Μαρία Κ. Δημητριάδου' || doctorName === 'Maria K. Dimitriadou' || doctorName === 'Maria Dimitriadou') {
+        panelUrl = 'https://onlineparentteenclinic.com/maria';
       } else {
         // Check for Dr. Fytrou variations
         const nameLower = (doctorName || '').toLowerCase();

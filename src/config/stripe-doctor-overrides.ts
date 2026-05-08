@@ -14,6 +14,11 @@ export const normalizeDoctorOverrideKey = (value?: string) =>
 
 export const doctorStripeOverrides: DoctorStripeOverride[] = [
   // Removed Dr. 1EYRO - test entry no longer needed
+  {
+    doctorName: 'Μαρία Κ. Δημητριάδου',
+    priceId: 'placeholder_maria_dimitriadou_price',
+    amountCents: 100
+  }
 ];
 
 export const findDoctorStripeOverride = (
