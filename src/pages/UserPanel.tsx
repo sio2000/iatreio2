@@ -6,7 +6,6 @@ import Contact from '../components/Contact';
 import ReviewForm from '../components/ReviewForm';
 import { getDoctorPrice } from '../lib/stripe-api';
 import { createRealStripeCheckout } from '../lib/stripe-checkout';
-import { findDoctorStripeOverride } from '../config/stripe-doctor-overrides';
 import { Doctor } from '../types/appointments';
 import logoIatrio5 from '../assets/logoiatrio5.png';
 import DepositScheduler from '../components/DepositScheduler';
@@ -72,15 +71,7 @@ const UserPanel: React.FC<UserPanelProps> = ({ language }) => {
     }
   }, [language]);
 
-  const getDoctorOptionLabel = (doctor: Doctor) => {
-    const override = findDoctorStripeOverride(doctor.id, doctor.name);
-    if (override) {
-      const amount = (override.amountCents / 100).toFixed(2);
-      const liveLabel = translate('Live δοκιμή', 'Live test', 'Test en direct');
-      return `${doctor.name} — €${amount} ${liveLabel}`;
-    }
-    return doctor.name;
-  };
+  const getDoctorOptionLabel = (doctor: Doctor) => doctor.name;
 
   useEffect(() => {
     const loadUser = async () => {

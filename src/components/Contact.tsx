@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, MapPin, Clock, Calendar, Shield, Heart, Send, Instagram, Facebook, X, Clock3, CreditCard, Loader2 } from 'lucide-react';
 import profile2 from '../assets/profile2.JPG';
 import { supabase } from '../lib/supabase';
-import { findDoctorStripeOverride } from '../config/stripe-doctor-overrides';
 import { AdminSettings, Doctor, SlotInfo } from '../types/appointments';
 import { getUserTimezone, toDateString, getCurrentDateInTimezone, convertTimeToTimezone, getDoctorTimezone } from '../lib/timezone';
 import StripeCheckout from './StripeCheckout';
@@ -228,17 +227,6 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
       const displaySpecialty = specialtyMap[doctor.specialty] || doctor.specialty;
 
       baseDisplay = `${displayName} — ${displaySpecialty}`;
-    }
-
-    const override = findDoctorStripeOverride(doctor.id, doctor.name);
-    if (override) {
-      const amount = (override.amountCents / 100).toFixed(2);
-      const testLabel = language === 'fr'
-        ? 'Test en direct'
-        : language === 'en'
-        ? 'Live test'
-        : 'Live δοκιμή';
-      return `${baseDisplay} • €${amount} ${testLabel}`;
     }
 
     return baseDisplay;

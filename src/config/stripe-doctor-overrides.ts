@@ -13,11 +13,11 @@ export const normalizeDoctorOverrideKey = (value?: string) =>
     .trim();
 
 export const doctorStripeOverrides: DoctorStripeOverride[] = [
-  // Removed Dr. 1EYRO - test entry no longer needed
+  // Μαρία Κ. Δημητριάδου: €80 ανά συνεδρία (checkout σε live χρησιμοποιεί amount από frontend · το placeholder price id στο Stripe είναι διακοσμητικό)
   {
     doctorName: 'Μαρία Κ. Δημητριάδου',
     priceId: 'placeholder_maria_dimitriadou_price',
-    amountCents: 100
+    amountCents: 8000
   }
 ];
 

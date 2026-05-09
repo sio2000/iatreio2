@@ -9,19 +9,20 @@ ON CONFLICT (name) DO UPDATE SET
   specialty = EXCLUDED.specialty,
   active = EXCLUDED.active;
 
--- 2. Stripe product placeholder για €1 (100 cents) test
--- Σε live mode το create-checkout-session.js αγνοεί το stripe_price_id και χρησιμοποιεί price_data,
--- οπότε τα placeholder ids είναι ασφαλή. Επιπλέον, το stripe-doctor-overrides.ts entry παρακάμπτει
--- τελείως το stripe_products query για τη Μαρία στο frontend.
+-- 2. Stripe product placeholder για €80 (8000 cents) ανά συνεδρία
+-- Σε live mode το create-checkout-session.js χρησιμοποιεί το amount από το frontend (stripe-doctor-overrides.ts).
+-- Το stripe_products.price_amount_cents κρατιέται ευθυγραμμισμένο για αναφορές/UI που διαβάζουν τη βάση.
 INSERT INTO public.stripe_products (doctor_id, stripe_product_id, stripe_price_id, price_amount_cents, currency)
 VALUES (
   (SELECT id FROM public.doctors WHERE name = 'Μαρία Κ. Δημητριάδου'),
   'placeholder_maria_dimitriadou_product',
   'placeholder_maria_dimitriadou_price',
-  100,
+  8000,
   'eur'
 )
-ON CONFLICT (stripe_product_id) DO NOTHING;
+ON CONFLICT (stripe_product_id) DO UPDATE SET
+  price_amount_cents = EXCLUDED.price_amount_cents,
+  updated_at = now();
 
 -- 3. Έλεγχος ότι προστέθηκαν σωστά
 SELECT id, name, specialty, active FROM doctors
