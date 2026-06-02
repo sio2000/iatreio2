@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import ioannaCertificate from '../assets/ioanna_certificate.png';
@@ -15,8 +15,8 @@ import mariaPtychio from '../assets/Μαρία Κ. Δημητριάδουπτυ�
 import mariaMetaptychiako from '../assets/Μαρία Κ. ΔημητριάδουΜεταπτυχιακο (1).png';
 import mariaAdeiaAskiseos from '../assets/Μαρία Κ. ΔημητριάδουΑΔΕΙΑΑΣΚΗΣΕΩΣ (1).png';
 import mariaVeveosi from '../assets/Μαρία Κ. Δημητριάδουβεβαιωση (1).png';
-import ioannaPhoto from '../assets/Ιωάννα_Πισσάρη.jpg';
-import sofiaPhoto from '../assets/Σοφία_Σπυριάδου.jpg';
+import ioannaCarouselPhoto from '../assets/ιωαννα.jpg';
+import sofiaCarouselPhoto from '../assets/σοφια.jpg';
 import eiriniPhoto from '../assets/Eirini_Stergiou.jpg';
 import mariaPhoto from '../assets/Μαρία Κ. Δημητριάδου.jpg';
 
@@ -26,8 +26,6 @@ interface TeamMembersProps {
 
 type Lang = 'gr' | 'en' | 'fr';
 
-const AUTO_ROTATE_MS = 5000;
-
 const formatBioParagraph = (paragraph: string) =>
   paragraph.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-black">$1</span>');
 
@@ -35,7 +33,6 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ language }) => {
   const lang = language as Lang;
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const [bioMemberId, setBioMemberId] = useState<number | null>(null);
   const [selectedMember, setSelectedMember] = useState<number | null>(null);
   const [selectedPDFs, setSelectedPDFs] = useState<string[]>([]);
@@ -105,7 +102,7 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ language }) => {
       {
         id: 1,
         name: 'Ιωάννα Πισσάρη',
-        image: ioannaPhoto,
+        image: ioannaCarouselPhoto,
         bio: `Η κυρία Πισσάρη ολοκλήρωσε τις σπουδές της στην Ψυχολογία στο Εθνικό Καποδιστριακό Πανεπιστήμιο Αθηνών και ακολούθησε **Μεταπτυχιακό Πρόγραμμα Σπουδών στην Κλινική Ψυχική Υγεία** στο Πανεπιστήμιο «University of Wolverhampton» της Αγγλίας.
 
 Το ενδιαφέρον της στρέφεται γύρω από την **4ετή εκπαίδευση της στην Γνωστική Συμπεριφορική Ψυχοθεραπεία** από την Εταιρεία Γνωσιακής Συμπεριφορικής Ψυχοθεραπείας, ενώ παράλληλα είναι εξειδικευμένη στο **Φάσμα του Αυτισμού** και την **Διαταραχή Ελλειματικής Προσοχής και Υπερκινητικότητας (ΔΕΠΥ)** από το Πανεπιστήμιου «University of Derby» της Αγγλίας.
@@ -119,7 +116,7 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ language }) => {
       {
         id: 2,
         name: 'Σοφία Σπυριάδου',
-        image: sofiaPhoto,
+        image: sofiaCarouselPhoto,
         bio: `Η κυρία Σπυριάδου ολοκλήρωσε τις σπουδές της στη Ψυχολογία στο Αριστοτέλειο Πανεπιστήμιο Θεσσαλονίκης και ακολούθησε **Μεταπτυχιακό Πρόγραμμα Σπουδών στην Κλινική Ψυχική Υγεία** στο ίδιο Πανεπιστήμιο.
 
 Έχει εκπαιδευτεί στην **Κλινική Ψυχομετρία και Νευροψυχολογία** στη Γ' Πανεπιστημιακή Ψυχιατρική Κλινική του ΑΧΕΠΑ. Εμπλουτίζει τις γνώσεις της με την **4ετή εκπαίδευση της στη Γνωσιακή Συμπεριφορική Ψυχοθεραπεία** στην Ελληνική Εταιρεία Γνωσιακής και Συμπεριφορικής Ψυχοθεραπείας.
@@ -165,7 +162,7 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ language }) => {
       {
         id: 1,
         name: 'Ioanna Pissari',
-        image: ioannaPhoto,
+        image: ioannaCarouselPhoto,
         bio: `Ms. Pissari completed her studies in Psychology at the National and Kapodistrian University of Athens and followed a **Master's Program in Clinical Mental Health** at the University "University of Wolverhampton" in England.
 
 Her interest revolves around her **4-year training in Cognitive Behavioral Therapy** from the Cognitive Behavioral Therapy Society, while she is also specialized in **Autism Spectrum** and **Attention Deficit Hyperactivity Disorder (ADHD)** from the University "University of Derby" in England.
@@ -179,7 +176,7 @@ The clinical child psychologist speaks **fluent Greek and English**.`
       {
         id: 2,
         name: 'Sofia Spyriadou',
-        image: sofiaPhoto,
+        image: sofiaCarouselPhoto,
         bio: `Ms. Spyriadou completed her studies in Psychology at Aristotle University of Thessaloniki and followed a **Master's Program in Clinical Mental Health** at the same University.
 
 She has been trained in **Clinical Psychometry and Neuropsychology** at the 3rd University Psychiatric Clinic of AHEPA. She enriches her knowledge with her **4-year training in Cognitive Behavioral Therapy** at the Greek Society of Cognitive and Behavioral Therapy.
@@ -225,7 +222,7 @@ The clinical child psychologist speaks **fluent Greek**.`
       {
         id: 1,
         name: 'Ioanna Pissari',
-        image: ioannaPhoto,
+        image: ioannaCarouselPhoto,
         bio: `Mme Pissari a terminé ses études en Psychologie à l'Université Nationale et Kapodistrienne d'Athènes et a suivi un **Programme de Master en Santé Mentale Clinique** à l'Université "University of Wolverhampton" en Angleterre.
 
 Son intérêt tourne autour de sa **formation de 4 ans en Thérapie Cognitivo-Comportementale** de la Société de Thérapie Cognitivo-Comportementale, tandis qu'elle est également spécialisée dans le **Spectre de l'Autisme** et le **Trouble Déficitaire de l'Attention avec Hyperactivité (TDAH)** de l'Université "University of Derby" en Angleterre.
@@ -239,7 +236,7 @@ La psychologue clinique pour enfants parle **couramment le grec et l'anglais**.`
       {
         id: 2,
         name: 'Sofia Spyriadou',
-        image: sofiaPhoto,
+        image: sofiaCarouselPhoto,
         bio: `Mme Spyriadou a terminé ses études en Psychologie à l'Université Aristote de Thessalonique et a suivi un **Programme de Master en Santé Mentale Clinique** à la même Université.
 
 Elle a été formée en **Psychométrie Clinique et Neuropsychologie** à la 3ème Clinique Psychiatrique Universitaire d'AHEPA. Elle enrichit ses connaissances avec sa **formation de 4 ans en Thérapie Cognitivo-Comportementale** à la Société Grecque de Thérapie Cognitivo-Comportementale.
@@ -283,9 +280,9 @@ La psychologue clinique pour enfants parle **couramment le grec**.`
     ]
   };
 
-  const members = teamMembers[lang];
+  const CAROUSEL_ORDER = [1, 4, 2, 3];
+  const members = CAROUSEL_ORDER.map((id) => teamMembers[lang].find((m) => m.id === id)!);
   const memberCount = members.length;
-  const modalOpen = bioMemberId !== null || (selectedMember !== null && selectedPDFs.length > 0);
 
   const goToSlide = useCallback((index: number) => {
     setActiveIndex((index + memberCount) % memberCount);
@@ -298,16 +295,6 @@ La psychologue clinique pour enfants parle **couramment le grec**.`
   const goPrev = useCallback(() => {
     goToSlide(activeIndex - 1);
   }, [activeIndex, goToSlide]);
-
-  useEffect(() => {
-    if (isPaused || modalOpen) return;
-
-    const timer = window.setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % memberCount);
-    }, AUTO_ROTATE_MS);
-
-    return () => window.clearInterval(timer);
-  }, [isPaused, modalOpen, memberCount]);
 
   const bioMember = bioMemberId !== null
     ? members.find((m) => m.id === bioMemberId)
@@ -370,10 +357,6 @@ La psychologue clinique pour enfants parle **couramment le grec**.`
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           className="max-w-3xl mx-auto p-1 rounded-4xl bg-gradient-to-br from-pink-200/80 via-purple-200/70 to-blue-200/80 shadow-xl"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          onFocusCapture={() => setIsPaused(true)}
-          onBlurCapture={() => setIsPaused(false)}
         >
           <div className="rounded-[1.85rem] overflow-hidden bg-white/95 backdrop-blur-sm shadow-2xl border border-white/80">
             <div className="relative">

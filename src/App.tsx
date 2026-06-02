@@ -99,11 +99,11 @@ function App() {
             <TrustSection language={language} />
             <About language={language} />
             <TeamMembers language={language} />
+            <Contact language={language} />
             <Services language={language} />
             <Testimonials language={language} />
             <FAQ language={language} />
             <Articles language={language} />
-            <Contact language={language} />
             <Footer language={language} />
           </>
         );

@@ -20,10 +20,11 @@ const Footer: React.FC<FooterProps> = ({ language }) => {
       ],
       quickLinks: 'Γρήγοροι Σύνδεσμοι',
       linksList: [
-        'Σχετικά με τη Δρ. Φύτρου',
-        'Υπηρεσίες',
-        'Η Ομάδα μας',
-        'Επικοινωνία'
+        { label: 'Σχετικά με τη Δρ. Φύτρου', sectionId: 'about' },
+        { label: 'Υπηρεσίες', sectionId: 'services' },
+        { label: 'Η Ομάδα μας', sectionId: 'team' },
+        { label: 'Όροι Χρήσης & Πολιτική Απορρήτου', href: '/terms-privacy.html', external: true },
+        { label: 'Επικοινωνία', sectionId: 'contact' }
       ],
       emergency: 'Ειδοποίηση Έκτακτης Ανάγκης',
       emergencyText: 'Εάν εσείς ή το παιδί σας αντιμετωπίζετε μια έκτακτη ανάγκη ψυχικής υγείας, παρακαλώ επικοινωνήστε αμέσως με τις υπηρεσίες έκτακτης ανάγκης ή πηγαίνετε στο πλησιέστερο τμήμα επειγόντων περιστατικών. Μην περιμένετε απάντηση σε διαδικτυακές επικοινωνίες.',
@@ -54,10 +55,11 @@ const Footer: React.FC<FooterProps> = ({ language }) => {
       ],
       quickLinks: 'Quick Links',
       linksList: [
-        'About Dr. Fytrou',
-        'Services',
-        'Our Team',
-        'Contact'
+        { label: 'About Dr. Fytrou', sectionId: 'about' },
+        { label: 'Services', sectionId: 'services' },
+        { label: 'Our Team', sectionId: 'team' },
+        { label: 'Terms of Service & Privacy Policy', href: '/terms-privacy.html', external: true },
+        { label: 'Contact', sectionId: 'contact' }
       ],
       emergency: 'Emergency Notice',
       emergencyText: 'If you or your child is experiencing a mental health emergency, please contact emergency services immediately or go to your nearest emergency room. Do not wait for a response to online communications.',
@@ -88,10 +90,11 @@ const Footer: React.FC<FooterProps> = ({ language }) => {
       ],
       quickLinks: 'Liens Rapides',
       linksList: [
-        'À propos du Dr Fytrou',
-        'Services',
-        'Notre équipe',
-        'Contact'
+        { label: 'À propos du Dr Fytrou', sectionId: 'about' },
+        { label: 'Services', sectionId: 'services' },
+        { label: 'Notre équipe', sectionId: 'team' },
+        { label: 'Conditions d\'utilisation & Politique de confidentialité', href: '/terms-privacy.html', external: true },
+        { label: 'Contact', sectionId: 'contact' }
       ],
       emergency: 'Avis d\'Urgence',
       emergencyText: 'Si vous ou votre enfant faites face à une urgence de santé mentale, veuillez contacter immédiatement les services d\'urgence ou aller au service d\'urgence le plus proche. N\'attendez pas de réponse aux communications en ligne.',
@@ -234,15 +237,22 @@ const Footer: React.FC<FooterProps> = ({ language }) => {
             <h4 className="font-semibold text-lg mb-4 font-poppins">{content[language].quickLinks}</h4>
             <ul className="space-y-2">
               {content[language].linksList.map((link, index) => {
-                const sectionIds = ['about', 'services', 'team', 'contact'];
                 return (
                   <motion.li 
                     key={index}
                     whileHover={{ x: 5 }}
                     className="text-gray-300 hover:text-rose-soft transition-colors cursor-pointer font-nunito"
-                    onClick={() => scrollToSection(sectionIds[index])}
+                    onClick={() => {
+                      if (link.href) {
+                        window.open(link.href, '_blank', 'noopener,noreferrer');
+                        return;
+                      }
+                      if (link.sectionId) {
+                        scrollToSection(link.sectionId);
+                      }
+                    }}
                   >
-                    {link}
+                    {link.label}
                   </motion.li>
                 );
               })}
