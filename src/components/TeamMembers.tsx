@@ -16,7 +16,7 @@ import mariaMetaptychiako from '../assets/Μαρία Κ. Δημητριάδου�
 import mariaAdeiaAskiseos from '../assets/Μαρία Κ. ΔημητριάδουΑΔΕΙΑΑΣΚΗΣΕΩΣ (1).png';
 import mariaVeveosi from '../assets/Μαρία Κ. Δημητριάδουβεβαιωση (1).png';
 import ioannaCarouselPhoto from '../assets/πισσάρη.png';
-import sofiaCarouselPhoto from '../assets/σοφια.jpg';
+import sofiaCarouselPhoto from '../assets/sofia.jpeg';
 import eiriniPhoto from '../assets/Eirini_Stergiou.jpg';
 import mariaPhoto from '../assets/Μαρία Κ. Δημητριάδου.jpg';
 
