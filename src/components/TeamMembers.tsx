@@ -155,7 +155,7 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ language }) => {
 
 Είναι η ιδανική ειδικός για τη **Πρώτη Συνεδρία των γονέων** με το Ιατρείο μας, την **Εξέταση-Ψυχοθεραπεία εφήβων** και **Συμβουλευτική γονέων εφήβων**.
 
-Η κλινική παιδοψυχολόγος μιλάει **άψογα ελληνικά**.`
+Η κλινική ψυχολόγος μιλάει **άψογα ελληνικά**.`
       }
     ],
     en: [
@@ -215,7 +215,7 @@ Through her many years of involvement with vulnerable social groups, she creates
 
 She is the ideal specialist for the **First Parent Session** with our Clinic, the **Examination and Psychotherapy of adolescents** and **Counseling for parents of adolescents**.
 
-The clinical child psychologist speaks **fluent Greek**.`
+The clinical psychologist speaks **fluent Greek**.`
       }
     ],
     fr: [
@@ -275,7 +275,7 @@ Son intérêt clinique se concentre principalement sur le soutien des adultes et
 
 Elle est la spécialiste idéale pour la **Première Session Parentale** avec notre Clinique, l'**Examen-Psychothérapie des adolescents** et le **Conseil aux parents d'adolescents**.
 
-La psychologue clinique pour enfants parle **couramment le grec**.`
+La psychologue clinique parle **couramment le grec**.`
       }
     ]
   };
