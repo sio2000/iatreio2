@@ -3,14 +3,10 @@
 -- Ειδικότητα: Ψυχολόγος
 -- ============================================================================
 --
--- ⚠️ ΠΡΟΣΟΧΗ ΤΙΜΗ / TEST MODE:
---   Η κανονική τιμή συνεδρίας της Νίκης Τσιμπίδη είναι €80 (8000 cents).
---   ΠΡΟΣΩΡΙΝΑ ορίζουμε 0,60€ (60 cents) ώστε να γίνει ΕΝΑ χειροκίνητο test
---   πραγματικής συναλλαγής πριν το τελικό deploy.
+-- ΤΙΜΗ: €80 ανά συνεδρία (8000 cents). Το test με 0,60€ ολοκληρώθηκε επιτυχώς.
 --   Το checkout σε live χρησιμοποιεί το ποσό από το frontend
---   (src/config/stripe-doctor-overrides.ts → amountCents). Ο πίνακας
+--   (src/config/stripe-doctor-overrides.ts → amountCents = 8000). Ο πίνακας
 --   stripe_products κρατιέται ευθυγραμμισμένος για αναφορές/UI.
---   Μετά το test, τρέξε το update στο τέλος του αρχείου (βλ. ΒΗΜΑ 4) για €80.
 -- ----------------------------------------------------------------------------
 
 -- 1. Νέα ιατρός (ίδιο pattern με add_maria_dimitriadou.sql)
@@ -20,13 +16,13 @@ ON CONFLICT (name) DO UPDATE SET
   specialty = EXCLUDED.specialty,
   active = EXCLUDED.active;
 
--- 2. Stripe product placeholder — ΠΡΟΣΩΡΙΝΑ 0,60€ (60 cents) για το test
+-- 2. Stripe product placeholder — €80 (8000 cents)
 INSERT INTO public.stripe_products (doctor_id, stripe_product_id, stripe_price_id, price_amount_cents, currency)
 VALUES (
   (SELECT id FROM public.doctors WHERE name = 'Νίκη Τσιμπίδη'),
   'placeholder_niki_tsimpidi_product',
   'placeholder_niki_tsimpidi_price',
-  60,
+  8000,
   'eur'
 )
 ON CONFLICT (stripe_product_id) DO UPDATE SET
@@ -43,10 +39,8 @@ JOIN public.doctors d ON sp.doctor_id = d.id
 WHERE d.name = 'Νίκη Τσιμπίδη';
 
 -- ----------------------------------------------------------------------------
--- 4. ⏭️ ΜΕΤΑ ΤΟ TEST: όρισε την κανονική τιμή €80 (8000 cents)
---    Τρέξε ΚΑΙ το παρακάτω UPDATE ΚΑΙ άλλαξε το amountCents σε 8000 στο
---    src/config/stripe-doctor-overrides.ts (η μόνη πηγή τιμής στο live checkout).
+-- 4. Συγχρονισμός τιμής σε €80 (τρέξε το αν η γραμμή υπάρχει ήδη με 60 cents από το test)
 -- ----------------------------------------------------------------------------
--- UPDATE public.stripe_products
--- SET price_amount_cents = 8000, updated_at = now()
--- WHERE doctor_id = (SELECT id FROM public.doctors WHERE name = 'Νίκη Τσιμπίδη');
+UPDATE public.stripe_products
+SET price_amount_cents = 8000, updated_at = now()
+WHERE doctor_id = (SELECT id FROM public.doctors WHERE name = 'Νίκη Τσιμπίδη');

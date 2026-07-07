@@ -73,12 +73,13 @@ const DoctorPanel: React.FC<DoctorPanelProps> = ({ doctorName, doctorId, languag
       manualDepositsEmpty: 'Δεν υπάρχουν καταθέσεις προς εμφάνιση.',
       manualDepositsRefresh: 'Ανανέωση καταθέσεων',
       manualDepositColumns: {
-        createdAt: 'Ημερομηνία',
+        createdAt: 'Ημ/νία Συνεδρίας',
         parent: 'Γονέας',
         sessions: 'Συνεδρίες',
         amount: 'Ποσό',
         status: 'Κατάσταση',
-        notes: 'Σημειώσεις'
+        notes: 'Σημειώσεις',
+        paymentDate: 'Ημερομηνία πληρωμής'
       },
       markCompleted: 'Σήμανση ως ολοκληρωμένο',
       statusPendingCheckout: 'Σε εξέλιξη',
@@ -130,12 +131,13 @@ const DoctorPanel: React.FC<DoctorPanelProps> = ({ doctorName, doctorId, languag
       manualDepositsEmpty: 'No manual deposits to display.',
       manualDepositsRefresh: 'Refresh deposits',
       manualDepositColumns: {
-        createdAt: 'Date',
+        createdAt: 'Session date/time',
         parent: 'Parent',
         sessions: 'Sessions',
         amount: 'Amount',
         status: 'Status',
-        notes: 'Notes'
+        notes: 'Notes',
+        paymentDate: 'Payment date'
       },
       markCompleted: 'Mark as completed',
       statusPendingCheckout: 'Processing',
