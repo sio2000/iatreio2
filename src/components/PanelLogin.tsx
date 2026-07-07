@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Eye, EyeOff, AlertCircle } from 'lucide-react';
-import { login, panelEmail } from '../lib/panelAuth';
+import { login } from '../lib/panelAuth';
 
 interface PanelLoginProps {
   identityKey: string;
   language: 'gr' | 'en';
   title?: string;
-  hideEmailHint?: boolean;
   onSuccess: () => void;
 }
 
-const PanelLogin: React.FC<PanelLoginProps> = ({ identityKey, language, title, hideEmailHint, onSuccess }) => {
+const PanelLogin: React.FC<PanelLoginProps> = ({ identityKey, language, title, onSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -155,12 +154,6 @@ const PanelLogin: React.FC<PanelLoginProps> = ({ identityKey, language, title, h
             )}
           </motion.button>
         </form>
-        {/* hint of which account is expected (email only, not the password) */}
-        {!hideEmailHint && (
-          <p className="mt-5 text-center text-xs text-gray-400 font-nunito break-all">
-            {panelEmail(identityKey)}
-          </p>
-        )}
       </motion.div>
     </div>
   );

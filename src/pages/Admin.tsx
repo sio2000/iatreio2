@@ -17,7 +17,6 @@ const Admin: React.FC = () => {
         identityKey="admin"
         language="gr"
         title="Ιατρείο — Admin Σύνδεση"
-        hideEmailHint
         onSuccess={() => setIsAuthenticated(true)}
       />
     );
