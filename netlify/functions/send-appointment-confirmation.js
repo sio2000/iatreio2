@@ -126,19 +126,20 @@ exports.handler = async (event) => {
     }
 
     // Validation
-    if (!parentEmail || !appointmentDate || !appointmentTime || !doctorName) {
+    // ΣΗΜΑΝΤΙΚΟ: για τις καταθέσεις (manual deposit) ΔΕΝ υπάρχει συγκεκριμένη ώρα
+    // (και ενίοτε ούτε ημερομηνία), οπότε ΜΟΝΟ το email & το όνομα ειδικού είναι
+    // υποχρεωτικά. Ημερομηνία/ώρα εμφανίζονται μόνο αν υπάρχουν.
+    if (!parentEmail || !doctorName) {
       console.error('❌ [EMAIL] Missing required fields:', {
         parentEmail: !parentEmail,
-        appointmentDate: !appointmentDate,
-        appointmentTime: !appointmentTime,
         doctorName: !doctorName
       });
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           error: 'Missing required fields',
-          required: ['parentEmail', 'appointmentDate', 'appointmentTime', 'doctorName']
+          required: ['parentEmail', 'doctorName']
         })
       };
     }
@@ -148,13 +149,18 @@ exports.handler = async (event) => {
     // The booking flow stores `time` and `date` already in the user's local timezone
     // (`user_timezone` is saved alongside as metadata), so no UTC re-interpretation is needed.
     function formatDateTime(dateStr, timeStr) {
-      if (!dateStr || !timeStr) return { date: '', time: '' };
-      const dateParts = String(dateStr).split('-');
-      const date = dateParts.length === 3
-        ? `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`
-        : String(dateStr);
-      // Take only HH:MM from "HH:MM" or "HH:MM:SS"
-      const time = String(timeStr).substring(0, 5);
+      let date = '';
+      let time = '';
+      if (dateStr) {
+        const dateParts = String(dateStr).split('-');
+        date = dateParts.length === 3
+          ? `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`
+          : String(dateStr);
+      }
+      if (timeStr) {
+        // Take only HH:MM from "HH:MM" or "HH:MM:SS"
+        time = String(timeStr).substring(0, 5);
+      }
       return { date, time };
     }
 
@@ -162,14 +168,21 @@ exports.handler = async (event) => {
     // userTimezone is intentionally not used for rendering — kept for future logging/diagnostics
     void userTimezone;
 
+    // Πρόταση «Σας περιμένουμε...» — προσαρμόζεται αν λείπει ώρα (κατάθεση) ή ημερομηνία
+    const whenSentence = (formattedDate && formattedTime)
+      ? `Σας περιμένουμε την ${formattedDate} στις ${formattedTime} και σας παρακαλούμε να εγκαταστήσετε τις εφαρμογές Viber και WhatsApp προκειμένου η ειδικός ${finalDoctorName} να επικοινωνήσει μαζί σας.`
+      : formattedDate
+        ? `Σας περιμένουμε την ${formattedDate} και σας παρακαλούμε να εγκαταστήσετε τις εφαρμογές Viber και WhatsApp προκειμένου η ειδικός ${finalDoctorName} να επικοινωνήσει μαζί σας.`
+        : `Σας παρακαλούμε να εγκαταστήσετε τις εφαρμογές Viber και WhatsApp προκειμένου η ειδικός ${finalDoctorName} να επικοινωνήσει μαζί σας.`;
+
     // Δημιουργία email body
     const emailBody = `Καλωσορίσατε,
 
 Σας επιβεβαιώνουμε την πληρωμή σας στο Ιατρείο της Δρ. Φύτρου Άννα Μαρία.
 
-Σας περιμένουμε την ${formattedDate} στις ${formattedTime} και σας παρακαλούμε να εγκαταστήσετε τις εφαρμογές Viber και WhatsApp προκειμένου η ειδικός ${finalDoctorName} να επικοινωνήσει μαζί σας.
+${whenSentence}
 
-Μέσα από την πλατφόρμα μας μπορείτε ενημερώνεστε για κάθε νέο του Ιατρείου και να ρυθμίσετε κάθε συνδιαλλαγή σας άμεσα και γρήγορα. 
+Μέσα από την πλατφόρμα μας μπορείτε ενημερώνεστε για κάθε νέο του Ιατρείου και να ρυθμίσετε κάθε συνδιαλλαγή σας άμεσα και γρήγορα.
 
 Στην επιλογή «κατάθεση» του site μπορείτε να προπληρώσετε τις συνεδρίες του μήνα σας με όποια ειδικό συνεργάζεστε.
 
@@ -200,13 +213,13 @@ exports.handler = async (event) => {
             <h2 style="color: #6B46C1; margin-bottom: 20px;">Καλωσορίσατε,</h2>
             
             <p>Σας επιβεβαιώνουμε την πληρωμή σας στο <strong>Ιατρείο της Δρ. Φύτρου Άννα Μαρία</strong>.</p>
-            
+
             <div style="background-color: #F3F4F6; padding: 15px; border-radius: 8px; margin: 20px 0;">
-              <p style="margin: 0;"><strong>Ημερομηνία:</strong> ${formattedDate}</p>
-              <p style="margin: 5px 0 0 0;"><strong>Ώρα:</strong> ${formattedTime}</p>
+              ${formattedDate ? `<p style="margin: 0;"><strong>Ημερομηνία:</strong> ${formattedDate}</p>` : ''}
+              ${formattedTime ? `<p style="margin: 5px 0 0 0;"><strong>Ώρα:</strong> ${formattedTime}</p>` : ''}
               <p style="margin: 5px 0 0 0;"><strong>Ειδικός:</strong> ${safeDoctorName}</p>
             </div>
-            
+
             <p>Σας παρακαλούμε να εγκαταστήσετε τις εφαρμογές <strong>Viber</strong> και <strong>WhatsApp</strong> προκειμένου η ειδικός ${safeDoctorName} να επικοινωνήσει μαζί σας.</p>
             
             <p>Μέσα από την πλατφόρμα μας μπορείτε ενημερώνεστε για κάθε νέο του Ιατρείου και να ρυθμίσετε κάθε συνδιαλλαγή σας άμεσα και γρήγορα.</p>
