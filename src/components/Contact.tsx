@@ -69,40 +69,6 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
     }));
   }, [prefill]);
   
-  // Φιλτραρισμένες θεματολογίες βάσει επιλεγμένης ειδικότητας
-  const getAvailableThematologies = () => {
-    if (!selectedSpecialty) return [];
-    
-    if (selectedSpecialty === 'psychiatrist') {
-      // Για Ψυχίατρο Παιδιού και Εφήβου & Ψυχοθεραπεύτρια: εποπτεία ειδικών, φαρμακευτική ρύθμιση, επιστημονική επιμέλεια, εξέταση παιδιού από ψυχίατρο, ψυχοθεραπεία παιδιού με ψυχίατρο
-      return [
-        'supervision',
-        'medicationAdjustment', 
-        'scientificSupervision',
-        'childExamPsychiatrist',
-        'childTherapyPsychiatrist'
-      ];
-    } else if (selectedSpecialty === 'psychologist') {
-      // Για Ψυχολόγο: όλες οι υπόλοιπες
-      return [
-        'firstSession',
-        'parentCounseling',
-        'childExamPsychologist',
-        'childTherapyPsychologist'
-      ];
-    } else if (selectedSpecialty === 'clinicalPsychologist') {
-      // Για Κλινική Παιδοψυχολόγο & Ψυχοθεραπεύτρια: όλες οι υπόλοιπες
-      return [
-        'firstSession',
-        'parentCounseling',
-        'childExamPsychologist',
-        'childTherapyPsychologist'
-      ];
-    }
-    
-    return [];
-  };
-
   // Φιλτραρισμένοι γιατροί βάσει επιλεγμένης ειδικότητας
   const filteredDoctors = doctors.filter(doctor => {
     // Αποκλεισμός Dr. 1EYRO (test entry)
@@ -193,7 +159,8 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
         'Σοφία Σπυριάδου': 'Sofia Spyriadou',
         'Ιωάννα Πισσάρη': 'Ioanna Pissari',
         'Ειρήνη Στεργίου': 'Eirini Stergiou',
-        'Μαρία Κ. Δημητριάδου': 'Maria K. Dimitriadou'
+        'Μαρία Κ. Δημητριάδου': 'Maria K. Dimitriadou',
+        'Νίκη Τσιμπίδη': 'Niki Tsimpidi'
       };
 
       const specialtyMap: { [key: string]: string } = {
@@ -214,7 +181,8 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
         'Σοφία Σπυριάδου': 'Sofia Spyriadou',
         'Ιωάννα Πισσάρη': 'Ioanna Pissari',
         'Ειρήνη Στεργίου': 'Eirini Stergiou',
-        'Μαρία Κ. Δημητριάδου': 'Maria K. Dimitriadou'
+        'Μαρία Κ. Δημητριάδου': 'Maria K. Dimitriadou',
+        'Νίκη Τσιμπίδη': 'Niki Tsimpidi'
       };
 
       const specialtyMap: { [key: string]: string } = {
@@ -317,10 +285,10 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
       return;
     }
     
-    if (!selectedSpecialty || !selectedDoctorId || !formData.appointmentDate || !selectedTime) {
-      alert(language==='gr' ? 'Επιλέξτε ειδικότητα, ειδικό, ημερομηνία και ώρα.' : 
-            language==='en' ? 'Select specialty, specialist, date and time.' : 
-            'Sélectionnez spécialité, spécialiste, date et heure.');
+    if (!selectedDoctorId || !formData.appointmentDate || !selectedTime) {
+      alert(language==='gr' ? 'Επιλέξτε ειδικό, ημερομηνία και ώρα.' :
+            language==='en' ? 'Select specialist, date and time.' :
+            'Sélectionnez spécialiste, date et heure.');
       return;
     }
     
@@ -1819,86 +1787,16 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
 
 
               <div>
-                <label htmlFor="isFirstSession" className="block text-sm font-medium text-gray-700 mb-2 font-quicksand">
-                  {content[language].isFirstSession}
-                </label>
-                <motion.select
-                  whileFocus={{ scale: 1.02 }}
-                  id="isFirstSession"
-                  name="isFirstSession"
-                  value={formData.isFirstSession}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-rose-soft focus:border-transparent transition-all duration-300 font-nunito"
-                >
-                  <option value="">{language === 'gr' ? 'Επιλέξτε επιλογή' : 
-                    language === 'en' ? 'Select option' : 
-                    'Sélectionnez une option'}</option>
-                  <option value="yes">{content[language].isFirstSessionOptions.yes}</option>
-                  <option value="no">{content[language].isFirstSessionOptions.no}</option>
-                </motion.select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 font-quicksand">
-                  {content[language].specialty}
-                </label>
-                <motion.select
-                  whileFocus={{ scale: 1.02 }}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-rose-soft focus:border-transparent transition-all duration-300 font-nunito"
-                  value={selectedSpecialty}
-                  onChange={e => setSelectedSpecialty(e.target.value)}
-                >
-                  <option value="">{content[language].selectSpecialty}</option>
-                  <option value="psychiatrist">{content[language].specialtyOptions.psychiatrist}</option>
-                  <option value="clinicalPsychologist">{content[language].specialtyOptions.clinicalPsychologist}</option>
-                  <option value="psychologist">{content[language].specialtyOptions.psychologist}</option>
-                </motion.select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 font-quicksand">
-                  {content[language].thematologies}
-                </label>
-                <motion.select
-                  whileFocus={{ scale: 1.02 }}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-rose-soft focus:border-transparent transition-all duration-300 font-nunito"
-                  value={selectedThematology}
-                  onChange={e => setSelectedThematology(e.target.value)}
-                  disabled={!selectedSpecialty}
-                >
-                  <option value="">
-                    {selectedSpecialty 
-                      ? content[language].selectThematology 
-                      : (language === 'gr' ? 'Πρώτα επιλέξτε ειδικότητα' : 
-                        language === 'en' ? 'First select specialty' : 
-                        'Sélectionnez d\'abord une spécialité')
-                    }
-                  </option>
-                  {getAvailableThematologies().map(thematologyKey => (
-                    <option key={thematologyKey} value={thematologyKey}>
-                      {content[language].thematologyOptions[thematologyKey as keyof typeof content[typeof language]['thematologyOptions']]}
-                    </option>
-                  ))}
-                </motion.select>
-              </div>
-
-              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2 font-quicksand">
                   {content[language].doctor}
                 </label>
-                <select 
-                  className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-rose-soft focus:border-transparent transition-all duration-300 font-nunito" 
-                  value={selectedDoctorId} 
+                <select
+                  className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-rose-soft focus:border-transparent transition-all duration-300 font-nunito"
+                  value={selectedDoctorId}
                   onChange={e=> setSelectedDoctorId(e.target.value)}
-                  disabled={!selectedSpecialty}
                 >
                   <option value="">
-                    {selectedSpecialty 
-                      ? content[language].selectDoctor 
-                      : (language === 'gr' ? 'Πρώτα επιλέξτε ειδικότητα' : 
-                        language === 'en' ? 'First select specialty' : 
-                        'Sélectionnez d\'abord une spécialité')
-                    }
+                    {content[language].selectDoctor}
                   </option>
                   {filteredDoctors.map(d=> (
                     <option key={d.id} value={d.id}>{getDoctorDisplayName(d)}</option>
@@ -2247,8 +2145,7 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
                   whileTap={{ scale: 0.95 }}
                   type="submit"
                   disabled={
-                    !selectedSpecialty || 
-                    !formData.phone || 
+                    !formData.phone ||
                     !formData.phone.trim() ||
                     !selectedDoctorId || 
                     !formData.appointmentDate || 
@@ -2260,8 +2157,7 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
                     messageLength > 200
                   }
                   className={`w-full font-semibold py-4 px-6 rounded-2xl shadow-xl transition-all duration-300 font-poppins ${
-                    !selectedSpecialty || 
-                    !formData.phone || 
+                    !formData.phone ||
                     !formData.phone.trim() ||
                     !selectedDoctorId || 
                     !formData.appointmentDate || 

@@ -6,6 +6,7 @@ import { Appointment } from '../types/appointments';
 // no timezone utilities needed here
 import { usePayments } from '../hooks/usePayments';
 import { getCountryFlagFromTimezone, getCountryFlagTooltip } from '../lib/country-flags';
+import DoctorAvailabilityManager from './DoctorAvailabilityManager';
 
 interface DoctorPanelProps {
   doctorName: string;
@@ -17,7 +18,7 @@ interface DoctorPanelProps {
 const DoctorPanel: React.FC<DoctorPanelProps> = ({ doctorName, doctorId, language, onLogout }) => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'appointments' | 'wallet' | 'manualDeposits'>('appointments');
+  const [activeTab, setActiveTab] = useState<'appointments' | 'availability' | 'wallet' | 'manualDeposits'>('appointments');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const [doctorRecordId, setDoctorRecordId] = useState<string | null>(null);
@@ -34,6 +35,7 @@ const DoctorPanel: React.FC<DoctorPanelProps> = ({ doctorName, doctorId, languag
       title: `Panel ${doctorName}`,
       subtitle: 'Διαχείριση ραντεβού',
       appointments: 'Ραντεβού',
+      availability: 'Πρόγραμμα',
       wallet: 'Το Ταμείο μου',
       noAppointments: 'Δεν υπάρχουν ραντεβού',
       loading: 'Φόρτωση...',
@@ -90,6 +92,7 @@ const DoctorPanel: React.FC<DoctorPanelProps> = ({ doctorName, doctorId, languag
       title: `${doctorName} Panel`,
       subtitle: 'Manage appointments',
       appointments: 'Appointments',
+      availability: 'Schedule',
       wallet: 'My Wallet',
       noAppointments: 'No appointments found',
       loading: 'Loading...',
@@ -434,6 +437,18 @@ const DoctorPanel: React.FC<DoctorPanelProps> = ({ doctorName, doctorId, languag
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveTab('availability')}
+              className={`px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === 'availability'
+                  ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-lg'
+                  : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+              }`}
+            >
+              📆 {content[language].availability}
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setActiveTab('wallet')}
               className={`px-6 py-3 rounded-xl font-semibold transition-all ${
                 activeTab === 'wallet'
@@ -648,6 +663,15 @@ const DoctorPanel: React.FC<DoctorPanelProps> = ({ doctorName, doctorId, languag
                 )}
               </>
             )}
+          </motion.div>
+        ) : activeTab === 'availability' ? (
+          /* 📆 Availability / Schedule Section */
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <DoctorAvailabilityManager doctorName={doctorName} language={language} />
           </motion.div>
         ) : activeTab === 'wallet' ? (
           /* 💰 Wallet Section - Εξαιρετικό UI */

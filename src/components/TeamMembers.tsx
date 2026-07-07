@@ -19,6 +19,9 @@ import ioannaCarouselPhoto from '../assets/πισσάρη.png';
 import sofiaCarouselPhoto from '../assets/sofia.jpeg';
 import eiriniPhoto from '../assets/Eirini_Stergiou.jpg';
 import mariaPhoto from '../assets/Μαρία Κ. Δημητριάδου.jpg';
+// Νίκη Τσιμπίδη: φωτογραφία & πτυχία από τον φάκελο public/ (σερβίρονται από τη ρίζα)
+const nikiPhoto = '/nikiprofile.jpg';
+const nikiCertificates = ['/ptixio1.png', '/ptixio2.png', '/ptixio3.png', '/pdfptixio.pdf', '/pdfptixio2.pdf'];
 
 interface TeamMembersProps {
   language: string;
@@ -85,6 +88,8 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ language }) => {
         mariaAdeiaAskiseos,
         mariaVeveosi
       ]);
+    } else if (memberId === 5) {
+      setSelectedPDFs(nikiCertificates);
     }
   };
 
@@ -156,6 +161,24 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ language }) => {
 Είναι η ιδανική ειδικός για τη **Πρώτη Συνεδρία των γονέων** με το Ιατρείο μας, την **Εξέταση-Ψυχοθεραπεία εφήβων** και **Συμβουλευτική γονέων εφήβων**.
 
 Η κλινική ψυχολόγος μιλάει **άψογα ελληνικά**.`
+      },
+      {
+        id: 5,
+        name: 'Νίκη Τσιμπίδη',
+        image: nikiPhoto,
+        bio: `Η κυρία Τσιμπίδη ολοκλήρωσε τις σπουδές της στην Ψυχολογία στο Εθνικό Καποδιστριακό Πανεπιστήμιο Αθηνών και ακολούθησε **Διετές Πρόγραμμα Εξειδικευμένης Επαγγελματικής Μετεκπαίδευσης στη Γνωσιακή Συμπεριφορική Ψυχοθεραπεία** του Κέντρου Εφαρμοσμένης Ψυχοθεραπείας και Συμβουλευτικής.
+
+Έχει εξειδικευμένη επιμόρφωση από το Κ.Ε.ΔΙ.ΒΙ.Μ. (Κέντρο Επιμόρφωσης και Διά Βίου Μάθησης) του Ε.Κ.Π.Α. στην **Κλινική Ψυχολογία Παιδιού και Εφήβου** και είναι **εξειδικευμένη** στην αντιμετώπιση της **Επαγγελματικής Εξουθένωσης (Burnout)** σε εκπαιδευτικούς Πρωτοβάθμιας και Δευτεροβάθμιας Εκπαίδευσης.
+
+Έχει εκπαιδευτεί μέσω των Επιμορφωτικών Προγραμμάτων του Πανεπιστημίου Αιγαίου στην **Ειδική Αγωγή και Εκπαίδευση** καθώς και στη **Σχολική Ψυχολογία**, αποκτώντας πιστοποιημένη επιμόρφωση και στους δύο τομείς.
+
+**Ως Υπέρμαχος της Πρόληψης στην Ψυχική Υγεία των Νέων**, έκανε την πρακτική της άσκηση στο Κέντρο Πρόληψης των Εξαρτήσεων και Προαγωγής της Ψυχοκοινωνικής Υγείας του Δήμου Ζωγράφου. Επί πενταετίας προσέφερε έργο στο Κέντρο Ειδικών Θεραπειών «Νόησις» με έδρα τη Σπάρτη Λακωνίας και στο Αυτοτελές Τμήμα Κοινωνικής Προστασίας Παιδείας & Πολιτισμού του Δήμου Ευρώτα.
+
+Η κυρία Τσιμπίδη είναι πολύ έμπειρη ελεύθερη επαγγελματίας και τα τελευταία χρόνια διατηρεί δικό της γραφείο στη Σκάλα Λακωνίας.
+
+Είναι η ιδανική ειδικός για τη **Πρώτη Συνεδρία των γονέων** με το Ιατρείο μας, **την Εξέταση και Ψυχοθεραπεία παιδιών και εφήβων** και για **Συμβουλευτική γονέων**.
+
+Η ψυχολόγος μιλάει **άψογα ελληνικά και αγγλικά**.`
       }
     ],
     en: [
@@ -216,6 +239,24 @@ Through her many years of involvement with vulnerable social groups, she creates
 She is the ideal specialist for the **First Parent Session** with our Clinic, the **Examination and Psychotherapy of adolescents** and **Counseling for parents of adolescents**.
 
 The clinical psychologist speaks **fluent Greek**.`
+      },
+      {
+        id: 5,
+        name: 'Niki Tsimpidi',
+        image: nikiPhoto,
+        bio: `Ms. Tsimpidi completed her studies in Psychology at the National and Kapodistrian University of Athens and followed a **Two-Year Program of Specialized Professional Further Training in Cognitive Behavioral Psychotherapy** at the Center of Applied Psychotherapy and Counseling.
+
+She has specialized training from the K.E.DI.VI.M. (Center for Training and Lifelong Learning) of the N.K.U.A. in **Clinical Psychology of Children and Adolescents** and is **specialized** in addressing **Professional Burnout** in Primary and Secondary Education teachers.
+
+She has been trained through the Continuing Education Programs of the University of the Aegean in **Special Education** as well as in **School Psychology**, obtaining certified training in both fields.
+
+**As an Advocate of Prevention in the Mental Health of Youth**, she completed her practical training at the Center for the Prevention of Addictions and Promotion of Psychosocial Health of the Municipality of Zografou. For five years she offered her work at the «Noisis» Center for Special Therapies, based in Sparta, Laconia, and at the Independent Department of Social Protection, Education & Culture of the Municipality of Evrotas.
+
+Ms. Tsimpidi is a highly experienced independent professional and in recent years maintains her own office in Skala, Laconia.
+
+She is the ideal specialist for the **First Parent Session** with our Clinic, **the Examination and Psychotherapy of children and adolescents** and for **Parent Counseling**.
+
+The psychologist speaks **fluent Greek and English**.`
       }
     ],
     fr: [
@@ -276,11 +317,31 @@ Son intérêt clinique se concentre principalement sur le soutien des adultes et
 Elle est la spécialiste idéale pour la **Première Session Parentale** avec notre Clinique, l'**Examen-Psychothérapie des adolescents** et le **Conseil aux parents d'adolescents**.
 
 La psychologue clinique parle **couramment le grec**.`
+      },
+      {
+        id: 5,
+        name: 'Niki Tsimpidi',
+        image: nikiPhoto,
+        bio: `Mme Tsimpidi a terminé ses études en Psychologie à l'Université Nationale et Kapodistrienne d'Athènes et a suivi un **Programme Biennal de Formation Professionnelle Spécialisée en Psychothérapie Cognitivo-Comportementale** du Centre de Psychothérapie Appliquée et de Conseil.
+
+Elle possède une formation spécialisée du K.E.DI.VI.M. (Centre de Formation et d'Apprentissage tout au long de la Vie) de l'U.N.K.A. en **Psychologie Clinique de l'Enfant et de l'Adolescent** et est **spécialisée** dans la prise en charge du **Burnout Professionnel** chez les enseignants du Primaire et du Secondaire.
+
+Elle a été formée à travers les Programmes de Formation Continue de l'Université de la Mer Égée en **Éducation Spécialisée** ainsi qu'en **Psychologie Scolaire**, obtenant une formation certifiée dans les deux domaines.
+
+**En tant que Défenseure de la Prévention dans la Santé Mentale des Jeunes**, elle a effectué son stage pratique au Centre de Prévention des Addictions et de Promotion de la Santé Psychosociale de la Municipalité de Zografou. Pendant cinq ans, elle a offert son travail au Centre de Thérapies Spéciales «Noisis», basé à Sparte, en Laconie, et au Département Autonome de Protection Sociale, d'Éducation & de Culture de la Municipalité d'Evrotas.
+
+Mme Tsimpidi est une professionnelle libérale très expérimentée et ces dernières années elle maintient son propre cabinet à Skala, en Laconie.
+
+Elle est la spécialiste idéale pour la **Première Session Parentale** avec notre Clinique, **l'Examen et Psychothérapie des enfants et adolescents** et pour le **Conseil Parental**.
+
+La psychologue parle **couramment le grec et l'anglais**.`
       }
     ]
   };
 
-  const CAROUSEL_ORDER = [1, 4, 2, 3];
+  const CAROUSEL_ORDER = [1, 4, 5, 2, 3];
+  // Μέλη με διαθέσιμα πτυχία/πιστοποιήσεις προς προβολή
+  const MEMBERS_WITH_CERTIFICATES = new Set<number>([1, 2, 3, 4, 5]);
   const members = CAROUSEL_ORDER.map((id) => teamMembers[lang].find((m) => m.id === id)!);
   const memberCount = members.length;
 
@@ -483,23 +544,27 @@ La psychologue clinique parle **couramment le grec**.`
             <div className="p-4 sm:p-6 overflow-y-auto">
               {renderBioContent(bioMember.bio)}
 
-              <div className="mt-6 flex justify-center">
-                <div className="w-16 h-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full"></div>
-              </div>
+              {MEMBERS_WITH_CERTIFICATES.has(bioMember.id) && (
+                <>
+                  <div className="mt-6 flex justify-center">
+                    <div className="w-16 h-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full"></div>
+                  </div>
 
-              <div className="mt-6 flex justify-center">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    handleViewCertificates(bioMember.id);
-                    setBioMemberId(null);
-                  }}
-                  className="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 text-gray-700 px-6 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all duration-300 font-quicksand border border-white/50"
-                >
-                  {content[lang].degreesButton}
-                </motion.button>
-              </div>
+                  <div className="mt-6 flex justify-center">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        handleViewCertificates(bioMember.id);
+                        setBioMemberId(null);
+                      }}
+                      className="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 text-gray-700 px-6 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all duration-300 font-quicksand border border-white/50"
+                    >
+                      {content[lang].degreesButton}
+                    </motion.button>
+                  </div>
+                </>
+              )}
             </div>
           </motion.div>
         </div>

@@ -307,11 +307,12 @@ export function convertTimeToTimezone(
  * @returns Η timezone του γιατρού
  */
 export function getDoctorTimezone(doctorName?: string | null): string {
+  // Default πλέον: Ελλάδα (Europe/Athens). ΜΟΝΟ η Δρ. Φύτρου είναι Ελβετία.
   if (!doctorName) {
-    return TIMEZONES.SWITZERLAND;
+    return TIMEZONES.GREECE;
   }
-  
-  // Ελέγχουμε αν ο γιατρός είναι στη λίστα γιατρών από Ελβετία
+
+  // Ελέγχουμε αν ο γιατρός είναι στη λίστα γιατρών από Ελβετία (μόνο η Φύτρου)
   try {
     // Dynamic import για να αποφύγουμε circular dependencies
     const { isDoctorInSwitzerland } = require('../config/doctor-timezones');
@@ -321,12 +322,12 @@ export function getDoctorTimezone(doctorName?: string | null): string {
   } catch (e) {
     // Αν αποτύχει το import, χρησιμοποιούμε fallback
   }
-  
+
   // Fallback: αν το όνομα περιέχει "Switzerland" ή "Zurich"
   if (doctorName.toLowerCase().includes('switzerland') || doctorName.toLowerCase().includes('zurich')) {
     return TIMEZONES.SWITZERLAND;
   }
-  
-  // Default: Ελβετία (Zurich) για το admin πρόγραμμα ιατρείου
-  return TIMEZONES.SWITZERLAND;
+
+  // Default: Ελλάδα (Athens) — όλες οι ιατροί πλην Φύτρου δουλεύουν σε Ελληνική ώρα
+  return TIMEZONES.GREECE;
 }

@@ -8,6 +8,11 @@
   # NOTE: Secrets must be set in Netlify Dashboard > Site settings > Environment variables
   # Do NOT commit secrets to git!
 
+# Scheduled function: επεκτείνει αυτόματα κάθε μέρα το εβδομαδιαίο πρόγραμμα
+# κάθε ιατρού (materialize availability_templates -> availability) για κυλιόμενο 3μηνο.
+[functions."generate-monthly-availability"]
+  schedule = "@daily"
+
 # AGGRESSIVE CACHE CONTROL - 100% FRESH CONTENT
 [[headers]]
   for = "/*"

@@ -18,6 +18,14 @@ export const doctorStripeOverrides: DoctorStripeOverride[] = [
     doctorName: 'Μαρία Κ. Δημητριάδου',
     priceId: 'placeholder_maria_dimitriadou_price',
     amountCents: 8000
+  },
+  // Νίκη Τσιμπίδη: κανονική τιμή €80 ανά συνεδρία.
+  // ⚠️ TEST MODE: προσωρινά 0,60€ (60 cents) για χειροκίνητο test πραγματικής συναλλαγής.
+  //    Πριν το τελικό deploy άλλαξε το amountCents σε 8000 (= €80).
+  {
+    doctorName: 'Νίκη Τσιμπίδη',
+    priceId: 'placeholder_niki_tsimpidi_price',
+    amountCents: 60
   }
 ];
 

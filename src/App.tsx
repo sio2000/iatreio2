@@ -18,8 +18,31 @@ import EiriniPanel from './components/EiriniPanel';
 import IoannaPanel from './components/IoannaPanel';
 import SofiaPanel from './components/SofiaPanel';
 import MariaPanel from './components/MariaPanel';
+import NikiPanel from './components/NikiPanel';
 import PaymentSuccessPopup from './components/PaymentSuccessPopup';
+import PanelLogin from './components/PanelLogin';
+import { isAuthed, logout } from './lib/panelAuth';
 import { usePaymentSuccess } from './hooks/usePaymentSuccess';
+
+// Gate που προστατεύει ένα doctor panel πίσω από login (email + κωδικός).
+const ProtectedPanel: React.FC<{
+  identityKey: string;
+  language: 'gr' | 'en' | 'fr';
+  onExit?: () => void;
+  render: (onLogout: () => void) => React.ReactNode;
+}> = ({ identityKey, language, onExit, render }) => {
+  const [authed, setAuthed] = useState(() => isAuthed(identityKey));
+  const lang: 'gr' | 'en' = language === 'en' ? 'en' : 'gr';
+  if (!authed) {
+    return <PanelLogin identityKey={identityKey} language={lang} onSuccess={() => setAuthed(true)} />;
+  }
+  const handleLogout = () => {
+    logout(identityKey);
+    setAuthed(false);
+    onExit?.();
+  };
+  return <>{render(handleLogout)}</>;
+};
 
 function App() {
   const [language, setLanguage] = useState<'gr' | 'en' | 'fr'>(() => {
@@ -54,6 +77,8 @@ function App() {
       setCurrentPage('sofia');
     } else if (path === '/maria' || path === '/maria/') {
       setCurrentPage('maria');
+    } else if (path === '/niki' || path === '/niki/') {
+      setCurrentPage('niki');
     }
   }, []);
 
@@ -84,13 +109,15 @@ function App() {
       case 'panel':
         return <UserPanel language={language} />;
       case 'eirini':
-        return <EiriniPanel language={language} onLogout={() => setCurrentPage('home')} />;
+        return <ProtectedPanel identityKey="eirini" language={language} onExit={() => setCurrentPage('home')} render={(onLogout) => <EiriniPanel language={language} onLogout={onLogout} />} />;
       case 'ioanna':
-        return <IoannaPanel language={language} onLogout={() => setCurrentPage('home')} />;
+        return <ProtectedPanel identityKey="ioanna" language={language} onExit={() => setCurrentPage('home')} render={(onLogout) => <IoannaPanel language={language} onLogout={onLogout} />} />;
       case 'sofia':
-        return <SofiaPanel language={language} onLogout={() => setCurrentPage('home')} />;
+        return <ProtectedPanel identityKey="sofia" language={language} onExit={() => setCurrentPage('home')} render={(onLogout) => <SofiaPanel language={language} onLogout={onLogout} />} />;
       case 'maria':
-        return <MariaPanel language={language} onLogout={() => setCurrentPage('home')} />;
+        return <ProtectedPanel identityKey="maria" language={language} onExit={() => setCurrentPage('home')} render={(onLogout) => <MariaPanel language={language} onLogout={onLogout} />} />;
+      case 'niki':
+        return <ProtectedPanel identityKey="niki" language={language} onExit={() => setCurrentPage('home')} render={(onLogout) => <NikiPanel language={language} onLogout={onLogout} />} />;
       default:
         return (
           <>
