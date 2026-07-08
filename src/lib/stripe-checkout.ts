@@ -55,9 +55,21 @@ export const createRealStripeCheckout = async (data: CreateCheckoutSessionData) 
     });
 
     // Check if this is a deposit purchase (no appointment date/time or concerns contains DEPOSIT_PURCHASE)
-    const isDepositPurchase = (!data.appointmentDate && !data.appointmentTime) || 
+    const isDepositPurchase = (!data.appointmentDate && !data.appointmentTime) ||
                               (typeof data.concerns === 'string' && data.concerns.startsWith('DEPOSIT_PURCHASE'));
-    const override = findDoctorStripeOverride(data.doctorId, data.doctorName);
+
+    // Manual deposit ("Κατάθεση") flow: the user enters a custom price per session.
+    // The doctor Stripe override (fixed per-session price) must NEVER apply here —
+    // otherwise the amount charged on Stripe would ignore the user's custom price and
+    // fall back to the doctor's standard session price. Overrides apply ONLY to the
+    // regular booking system.
+    const isManualDeposit =
+      (typeof data.concerns === 'string' && data.concerns.startsWith('MANUAL_DEPOSIT')) ||
+      !!data.manualDepositData;
+
+    const override = isManualDeposit
+      ? undefined
+      : findDoctorStripeOverride(data.doctorId, data.doctorName);
     const effectiveAmountCents = override ? override.amountCents : data.amountCents;
     
     // Get Stripe Price ID from database (only for regular appointments, not deposits)
