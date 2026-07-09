@@ -649,7 +649,8 @@ const Services: React.FC<ServicesProps> = ({ language }) => {
       closing: 'Το πιο σημαντικό είναι να θυμόμαστε ότι τα παιδιά με ΔΕΠΥ δεν χρειάζονται «τέλειες» διακοπές. Χρειάζονται ένα περιβάλλον με κατανόηση, λίγη δομή και πολλές ευκαιρίες για παιχνίδι και ξεκούραση.',
       sourcesTitle: 'Πηγές',
       readMore: 'Διαβάστε περισσότερα',
-      readLess: 'Εμφάνιση λιγότερων'
+      readLess: 'Εμφάνιση λιγότερων',
+      author: 'Σοφία Σπυριάδου'
     },
     en: {
       label: 'Article · ADHD & Summer',
@@ -674,7 +675,8 @@ const Services: React.FC<ServicesProps> = ({ language }) => {
       closing: 'The most important thing is to remember that children with ADHD do not need «perfect» holidays. They need an environment with understanding, a little structure and plenty of opportunities for play and rest.',
       sourcesTitle: 'Sources',
       readMore: 'Read more',
-      readLess: 'Show less'
+      readLess: 'Show less',
+      author: 'Σοφία Σπυριάδου'
     },
     fr: {
       label: 'Article · TDAH & Été',
@@ -699,7 +701,8 @@ const Services: React.FC<ServicesProps> = ({ language }) => {
       closing: "Le plus important est de se rappeler que les enfants atteints de TDAH n'ont pas besoin de vacances « parfaites ». Ils ont besoin d'un environnement empreint de compréhension, d'un peu de structure et de nombreuses occasions de jeu et de repos.",
       sourcesTitle: 'Sources',
       readMore: 'Lire la suite',
-      readLess: 'Afficher moins'
+      readLess: 'Afficher moins',
+      author: 'Σοφία Σπυριάδου'
     }
   } as const;
 
@@ -946,9 +949,14 @@ const Services: React.FC<ServicesProps> = ({ language }) => {
 
                   {/* Κλείσιμο */}
                   <div className="mt-8 max-w-3xl mx-auto">
-                    <p className="rounded-3xl bg-gradient-to-r from-warm-cream to-yellow-soft p-6 text-gray-700 font-nunito leading-relaxed text-center italic">
-                      {depy.closing}
-                    </p>
+                    <div className="rounded-3xl bg-gradient-to-r from-warm-cream to-yellow-soft p-6 text-center">
+                      <p className="text-gray-700 font-nunito leading-relaxed italic">
+                        {depy.closing}
+                      </p>
+                      <p className="mt-4 text-sm font-semibold text-gray-600 font-quicksand not-italic">
+                        {depy.author}
+                      </p>
+                    </div>
                   </div>
 
                   {/* Πηγές */}
