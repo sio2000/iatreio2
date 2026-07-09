@@ -676,7 +676,7 @@ const Services: React.FC<ServicesProps> = ({ language }) => {
       sourcesTitle: 'Sources',
       readMore: 'Read more',
       readLess: 'Show less',
-      author: 'Σοφία Σπυριάδου'
+      author: 'Sofia Spyriadou'
     },
     fr: {
       label: 'Article · TDAH & Été',
@@ -702,7 +702,7 @@ const Services: React.FC<ServicesProps> = ({ language }) => {
       sourcesTitle: 'Sources',
       readMore: 'Lire la suite',
       readLess: 'Afficher moins',
-      author: 'Σοφία Σπυριάδου'
+      author: 'Sofia Spyriadou'
     }
   } as const;
 
