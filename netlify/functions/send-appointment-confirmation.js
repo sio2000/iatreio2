@@ -17,8 +17,6 @@ const FROM = FROM_EMAIL.includes('<') ? FROM_EMAIL : `${FROM_NAME} <${FROM_EMAIL
 // με custom-domain From ενεργοποιεί τον κανόνα spam FREEMAIL_FORGED_REPLYTO (-2.5).
 // Οι απαντήσεις φτάνουν στο Gmail μέσω email forwarding του domain (δες README/οδηγίες).
 const REPLY_TO = process.env.REPLY_TO_EMAIL || 'iatreiodrfytrou@onlineparentteenclinic.com';
-// Logo ιατρείου (σταθερό public URL) — branding στην κορυφή του email για αξιοπιστία.
-const LOGO_URL = process.env.LOGO_URL || 'https://onlineparentteenclinic.com/logoiatrio.png';
 
 exports.handler = async (event) => {
   console.log('📧 [EMAIL] ===== Appointment Confirmation Email Function Called =====');
@@ -225,9 +223,6 @@ ${whenSentence}
         </head>
         <body>
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
-            <div style="text-align: center; margin-bottom: 20px;">
-              <img src="${LOGO_URL}" alt="Ιατρείο Δρ. Φύτρου" width="110" style="width: 110px; height: auto; display: inline-block; border: 0;" />
-            </div>
             <h2 style="color: #6B46C1; margin-bottom: 20px;">Καλωσορίσατε,</h2>
             
             <p>Σας επιβεβαιώνουμε την πληρωμή σας στο <strong>Ιατρείο της Δρ. Φύτρου Άννα Μαρία</strong>.</p>
