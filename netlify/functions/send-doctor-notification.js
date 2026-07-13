@@ -11,8 +11,10 @@ const FROM_EMAIL = process.env.FROM_EMAIL || 'iatreiodrfytrou@onlineparentteencl
 // Φιλικό όνομα αποστολέα — βελτιώνει αναγνωρισιμότητα & εμπιστοσύνη (λιγότερο spam).
 const FROM_NAME = process.env.FROM_NAME || 'Ιατρείο Δρ. Φύτρου';
 const FROM = FROM_EMAIL.includes('<') ? FROM_EMAIL : `${FROM_NAME} <${FROM_EMAIL}>`;
-// Reply-To: πραγματικό, παρακολουθούμενο inbox (θετικό σήμα deliverability, όχι "no-reply").
-const REPLY_TO = process.env.REPLY_TO_EMAIL || 'iatreiodrfytrou@gmail.com';
+// Reply-To: ΠΡΕΠΕΙ να είναι στο ΙΔΙΟ domain με το From. Freemail Reply-To με custom-domain
+// From ενεργοποιεί τον κανόνα spam FREEMAIL_FORGED_REPLYTO (-2.5). Το email του γονέα
+// εμφανίζεται ούτως ή άλλως μέσα στο μήνυμα, ώστε η ειδικός να επικοινωνήσει.
+const REPLY_TO = process.env.REPLY_TO_EMAIL || 'iatreiodrfytrou@onlineparentteenclinic.com';
 // Logo ιατρείου (σταθερό public URL) — branding στην κορυφή του email για αξιοπιστία.
 const LOGO_URL = process.env.LOGO_URL || 'https://onlineparentteenclinic.com/logoiatrio.png';
 
@@ -309,14 +311,10 @@ ${concerns ? `Σύντομη Περιγραφή Ανησυχιών:
 ${concerns}
 ` : ''}`;
 
-    // Reply-To προς τον γονέα (αν υπάρχει έγκυρο email) ώστε η ειδικός να απαντά
-    // απευθείας· αλλιώς προς το inbox του ιατρείου. Και τα δύο είναι θετικά σήματα.
-    const doctorReplyTo = (parentEmail && /.+@.+\..+/.test(parentEmail)) ? parentEmail : REPLY_TO;
-
     const { data, error } = await resend.emails.send({
       from: FROM,
       to: doctorEmail,
-      replyTo: doctorReplyTo,
+      replyTo: REPLY_TO,
       subject: `Νέα Κράτηση Ραντεβού - ${formattedDate} ${formattedTime}`,
       text: textContent,
       headers: {

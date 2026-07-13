@@ -13,9 +13,10 @@ const FROM_EMAIL = process.env.FROM_EMAIL || 'iatreiodrfytrou@onlineparentteencl
 // Αν το FROM_EMAIL έχει ήδη μορφή "Όνομα <email>", το αφήνουμε ως έχει.
 const FROM_NAME = process.env.FROM_NAME || 'Ιατρείο Δρ. Φύτρου';
 const FROM = FROM_EMAIL.includes('<') ? FROM_EMAIL : `${FROM_NAME} <${FROM_EMAIL}>`;
-// Reply-To: πραγματικό, παρακολουθούμενο inbox ώστε οι απαντήσεις να φτάνουν
-// και το μήνυμα να μη μοιάζει με "no-reply" μαζική αποστολή (θετικό σήμα deliverability).
-const REPLY_TO = process.env.REPLY_TO_EMAIL || 'iatreiodrfytrou@gmail.com';
+// Reply-To: ΠΡΕΠΕΙ να είναι στο ΙΔΙΟ domain με το From. Freemail (π.χ. gmail) Reply-To
+// με custom-domain From ενεργοποιεί τον κανόνα spam FREEMAIL_FORGED_REPLYTO (-2.5).
+// Οι απαντήσεις φτάνουν στο Gmail μέσω email forwarding του domain (δες README/οδηγίες).
+const REPLY_TO = process.env.REPLY_TO_EMAIL || 'iatreiodrfytrou@onlineparentteenclinic.com';
 // Logo ιατρείου (σταθερό public URL) — branding στην κορυφή του email για αξιοπιστία.
 const LOGO_URL = process.env.LOGO_URL || 'https://onlineparentteenclinic.com/logoiatrio.png';
 
