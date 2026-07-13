@@ -9,6 +9,13 @@ const resend = process.env.RESEND_API_KEY
 
 // Email από το οποίο θα στέλνονται τα emails (από το Resend dashboard)
 const FROM_EMAIL = process.env.FROM_EMAIL || 'iatreiodrfytrou@onlineparentteenclinic.com';
+// Φιλικό όνομα αποστολέα — βελτιώνει αναγνωρισιμότητα & εμπιστοσύνη (λιγότερο spam).
+// Αν το FROM_EMAIL έχει ήδη μορφή "Όνομα <email>", το αφήνουμε ως έχει.
+const FROM_NAME = process.env.FROM_NAME || 'Ιατρείο Δρ. Φύτρου';
+const FROM = FROM_EMAIL.includes('<') ? FROM_EMAIL : `${FROM_NAME} <${FROM_EMAIL}>`;
+// Reply-To: πραγματικό, παρακολουθούμενο inbox ώστε οι απαντήσεις να φτάνουν
+// και το μήνυμα να μη μοιάζει με "no-reply" μαζική αποστολή (θετικό σήμα deliverability).
+const REPLY_TO = process.env.REPLY_TO_EMAIL || 'iatreiodrfytrou@gmail.com';
 
 exports.handler = async (event) => {
   console.log('📧 [EMAIL] ===== Appointment Confirmation Email Function Called =====');
@@ -197,10 +204,15 @@ ${whenSentence}
     console.log('📧 [EMAIL] Final doctor name being sent:', finalDoctorName);
     
     const { data, error } = await resend.emails.send({
-      from: FROM_EMAIL,
+      from: FROM,
       to: parentEmail,
+      replyTo: REPLY_TO,
       subject: 'Επιβεβαίωση Κράτησης Ραντεβού - Ιατρείο Δρ. Φύτρου',
       text: emailBody,
+      headers: {
+        // Έγκυρο List-Unsubscribe (RFC 2369) — θετικό σήμα εμπιστοσύνης για Gmail/Yahoo.
+        'List-Unsubscribe': `<mailto:${REPLY_TO}?subject=unsubscribe>`,
+      },
       html: `
         <!DOCTYPE html>
         <html lang="el">
