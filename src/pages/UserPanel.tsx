@@ -161,13 +161,17 @@ const UserPanel: React.FC<UserPanelProps> = ({ language }) => {
       const normalizeDoctorName = (name: string) => 
         name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
       
-      // Φιλτράρουμε doctors - αποκλείουμε τον Dr. 1EYRO
+      // Φιλτράρουμε doctors - αποκλείουμε τον Dr. 1EYRO και τη Σοφία Σπυριάδου
       const allowedDoctors = doctorsData.filter((doctor) => {
         // Αποκλεισμός Dr. 1EYRO (test entry)
-        const is1eyro = normalizeDoctorName(doctor.name || '').includes('1eyro') || 
+        const is1eyro = normalizeDoctorName(doctor.name || '').includes('1eyro') ||
                        doctor.id === '48b3e29c-496c-421e-8d14-f7a89ded452a';
         if (is1eyro) return false;
-        
+
+        // Αποκλεισμός Σοφίας Σπυριάδου (δεν συνεργάζεται πλέον με το ιατρείο)
+        const normalizedName = normalizeDoctorName(doctor.name || '');
+        if (normalizedName.includes('σπυριαδου') || normalizedName.includes('spyriadou')) return false;
+
         // Μόνο active doctors
         return doctor.active === true;
       });

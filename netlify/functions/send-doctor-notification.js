@@ -20,8 +20,6 @@ const REPLY_TO = process.env.REPLY_TO_EMAIL || 'iatreiodrfytrou@onlineparentteen
 const DOCTOR_EMAILS = {
   'Ιωάννα Πισσάρη': 'ioannapissari@outlook.com',
   'Ioanna Pissari': 'ioannapissari@outlook.com',
-  'Σοφία Σπυριάδου': 'sofiasprd@icloud.com',
-  'Sofia Spyriadou': 'sofiasprd@icloud.com',
   'Ειρήνη Στεργίου': 'eirini.ster88@gmail.com',
   'Eirini Stergiou': 'eirini.ster88@gmail.com',
   'Μαρία Κ. Δημητριάδου': 'dimitriadoumaria00@gmail.com',
@@ -163,12 +161,6 @@ exports.handler = async (event) => {
         doctorEmail = 'ioannapissari@outlook.com';
         console.log(`✅ [DOCTOR_EMAIL] Found email via partial match for Ioanna Pissari: ${doctorEmail}`);
       }
-      // Partial match για Σοφία Σπυριάδου
-      else if (nameLower.includes('spyriadou') || nameLower.includes('σπυριάδου') || 
-               nameLower.includes('sofia') || nameLower.includes('σοφία')) {
-        doctorEmail = 'sofiasprd@icloud.com';
-        console.log(`✅ [DOCTOR_EMAIL] Found email via partial match for Sofia Spyriadou: ${doctorEmail}`);
-      }
       // Partial match για Ειρήνη Στεργίου
       else if (nameLower.includes('stergiou') || nameLower.includes('στεργίου') || 
                nameLower.includes('eirini') || nameLower.includes('ειρήνη')) {
@@ -260,8 +252,6 @@ exports.handler = async (event) => {
       let panelUrl = '';
       if (doctorName === 'Ιωάννα Πισσάρη' || doctorName === 'Ioanna Pissari') {
         panelUrl = 'https://onlineparentteenclinic.com/ioanna';
-      } else if (doctorName === 'Σοφία Σπυριάδου' || doctorName === 'Sofia Spyriadou') {
-        panelUrl = 'https://onlineparentteenclinic.com/sofia';
       } else if (doctorName === 'Ειρήνη Στεργίου' || doctorName === 'Eirini Stergiou') {
         panelUrl = 'https://onlineparentteenclinic.com/eirini';
       } else if (doctorName === 'Μαρία Κ. Δημητριάδου' || doctorName === 'Maria K. Dimitriadou' || doctorName === 'Maria Dimitriadou') {

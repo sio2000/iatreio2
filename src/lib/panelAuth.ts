@@ -31,11 +31,6 @@ export const PANEL_IDENTITIES: Record<string, PanelIdentity> = {
     email: 'ioannapissari@outlook.com',
     passHash: env.VITE_IOANNA_PW_HASH || 'a9877cccd9dc102717a15d288d81d2c2bbade5f638d5bacd3a127fbbfe8cc712'
   },
-  sofia: {
-    key: 'sofia',
-    email: 'sofiasprd@icloud.com',
-    passHash: env.VITE_SOFIA_PW_HASH || '43c723fc000d3f77fd6e06649aef534ab391da99eadbf2e975fa6156cad89e90'
-  },
   maria: {
     key: 'maria',
     email: 'dimitriadoumaria00@gmail.com',

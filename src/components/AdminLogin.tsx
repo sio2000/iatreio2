@@ -47,8 +47,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, language }) => {
     ],
     doctors: {
       'eirini123@': 'eirini',
-      'ioanna22!': 'ioanna', 
-      'sofia12%': 'sofia',
+      'ioanna22!': 'ioanna',
       'maria123#': 'maria'
     }
   };

@@ -3,9 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import ioannaCertificate from '../assets/ioanna_certificate.png';
 import wolverhampton from '../assets/WOLVERHAMPTON.png';
-import sofiaCertificate from '../assets/sofia_certificate.png';
-import sofiaMaster from '../assets/sofia_master.png';
-import sofia2 from '../assets/sofia_2.png';
 import certificatSystemique from '../assets/Certificat Systemique.png';
 import analytikiVeveosiStergiou from '../assets/Αναλυτική Βεβαίωση Στεργίου ΣΥΣΤΗΜΙΚΗ.png';
 import metaptychiakoEkseliktikisSxolikis from '../assets/ΜΕΤΑΠΤΥΧΙΑΚΟ ΕΞΕΛΙΚΤΙΚΗΣ ΣΧΟΛΙΚΗΣ ΨΥΧΟΛΟΓΙΑΣ.png';
@@ -16,7 +13,6 @@ import mariaMetaptychiako from '../assets/Μαρία Κ. Δημητριάδου�
 import mariaAdeiaAskiseos from '../assets/Μαρία Κ. ΔημητριάδουΑΔΕΙΑΑΣΚΗΣΕΩΣ (1).png';
 import mariaVeveosi from '../assets/Μαρία Κ. Δημητριάδουβεβαιωση (1).png';
 import ioannaCarouselPhoto from '../assets/πισσάρη.png';
-import sofiaCarouselPhoto from '../assets/sofia.jpeg';
 import eiriniPhoto from '../assets/Eirini_Stergiou.jpg';
 import mariaPhoto from '../assets/Μαρία Κ. Δημητριάδου.jpg';
 // Νίκη Τσιμπίδη: φωτογραφία & πτυχία από τον φάκελο public/ (σερβίρονται από τη ρίζα)
@@ -71,8 +67,6 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ language }) => {
     setSelectedMember(memberId);
     if (memberId === 1) {
       setSelectedPDFs([ioannaCertificate, wolverhampton]);
-    } else if (memberId === 2) {
-      setSelectedPDFs([sofiaCertificate, sofiaMaster, sofia2]);
     } else if (memberId === 3) {
       setSelectedPDFs([
         ptychioPsychologias,
@@ -117,20 +111,6 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ language }) => {
 Είναι η ιδανική ειδικός για τη **Πρώτη Συνεδρία των γονέων** με το Ιατρείο μας, την **Εξέταση και Ψυχοθεραπεία παιδιών και εφήβων** και για **Συμβουλευτική γονέων**.
 
 Η κλινική παιδοψυχολόγος μιλάει **άψογα ελληνικά και αγγλικά**.`
-      },
-      {
-        id: 2,
-        name: 'Σοφία Σπυριάδου',
-        image: sofiaCarouselPhoto,
-        bio: `Η κυρία Σπυριάδου ολοκλήρωσε τις σπουδές της στη Ψυχολογία στο Αριστοτέλειο Πανεπιστήμιο Θεσσαλονίκης και ακολούθησε **Μεταπτυχιακό Πρόγραμμα Σπουδών στην Κλινική Ψυχική Υγεία** στο ίδιο Πανεπιστήμιο.
-
-Έχει εκπαιδευτεί στην **Κλινική Ψυχομετρία και Νευροψυχολογία** στη Γ' Πανεπιστημιακή Ψυχιατρική Κλινική του ΑΧΕΠΑ. Εμπλουτίζει τις γνώσεις της με την **4ετή εκπαίδευση της στη Γνωσιακή Συμπεριφορική Ψυχοθεραπεία** στην Ελληνική Εταιρεία Γνωσιακής και Συμπεριφορικής Ψυχοθεραπείας.
-
-Είναι **πιστοποιημένη στη χορήγηση ψυχομετρικών εργαλείων** όπως : Τεστ νοημοσύνης ενηλίκων **WAIS- V**, Τεστ νοημοσύνης ανηλίκων **WISC- III**, Κλίμακα κατάθλιψης **Hamilton-D**, **SCI- PANSS**, για την σχιζοφρένεια, Κλίμακα μανίας, διπολικής διαταραχής, Young Mania Rating Scale. Έχει εκπαιδευτεί από το Αμερικανικό Πανεπιστήμιο του Κολοράντο «University of Colorado,陕西» στη **σχολική ψυχολογία**. Έχοντας τεράστια εμπειρία στο ελληνικό και το γερμανικό σύστημα εκπαίδευσης, διαθέτει όλα τα εφόδια να συνοδεύσει τα παιδιά και τους εφήβους στις δυσκολίες τους κατά τα σχολικά χρόνια.
-
-Είναι η ιδανική ειδικός για τη **Πρώτη Συνεδρία των γονέων** με το Ιατρείο μας, την **Εξέταση και Ψυχοθεραπεία παιδιών και εφήβων** και τους γονείς τους σε **Συμβουλευτική γονέων**.
-
-Η κλινική παιδοψυχολόγος μιλάει **άψογα ελληνικά και γερμανικά**.`
       },
       {
         id: 3,
@@ -197,20 +177,6 @@ She is the ideal specialist for the **First Parent Session** with our Clinic, **
 The clinical child psychologist speaks **fluent Greek and English**.`
       },
       {
-        id: 2,
-        name: 'Sofia Spyriadou',
-        image: sofiaCarouselPhoto,
-        bio: `Ms. Spyriadou completed her studies in Psychology at Aristotle University of Thessaloniki and followed a **Master's Program in Clinical Mental Health** at the same University.
-
-She has been trained in **Clinical Psychometry and Neuropsychology** at the 3rd University Psychiatric Clinic of AHEPA. She enriches her knowledge with her **4-year training in Cognitive Behavioral Therapy** at the Greek Society of Cognitive and Behavioral Therapy.
-
-She is **certified in administering psychometric tools** such as: Adult Intelligence Test **WAIS-V**, Juvenile Intelligence Test **WISC-III**, Depression Scale **Hamilton-D**, **SCI-PANSS** for schizophrenia, Mania Scale, bipolar disorder, Young Mania Rating Scale. She has been trained by the American University of Colorado "University of Colorado, USA" in **school psychology**. Having extensive experience in the Greek and German education system, she has all the tools to support children and adolescents in their difficulties during school years.
-
-She is the ideal specialist for the **First Parent Session** with our Clinic, **Examination and Psychotherapy of children and adolescents** and their parents in **Parent Counseling**.
-
-The clinical child psychologist speaks **fluent Greek and German**.`
-      },
-      {
         id: 3,
         name: 'Eirini Stergiou',
         image: eiriniPhoto,
@@ -275,20 +241,6 @@ Elle est la spécialiste idéale pour la **Première Session Parentale** avec no
 La psychologue clinique pour enfants parle **couramment le grec et l'anglais**.`
       },
       {
-        id: 2,
-        name: 'Sofia Spyriadou',
-        image: sofiaCarouselPhoto,
-        bio: `Mme Spyriadou a terminé ses études en Psychologie à l'Université Aristote de Thessalonique et a suivi un **Programme de Master en Santé Mentale Clinique** à la même Université.
-
-Elle a été formée en **Psychométrie Clinique et Neuropsychologie** à la 3ème Clinique Psychiatrique Universitaire d'AHEPA. Elle enrichit ses connaissances avec sa **formation de 4 ans en Thérapie Cognitivo-Comportementale** à la Société Grecque de Thérapie Cognitivo-Comportementale.
-
-Elle est **certifiée dans l'administration d'outils psychométriques** tels que : Test d'intelligence adulte **WAIS-V**, Test d'intelligence juvénile **WISC-III**, Échelle de dépression **Hamilton-D**, **SCI-PANSS** pour la schizophrénie, Échelle de manie, trouble bipolaire, Young Mania Rating Scale. Elle a été formée par l'Université Américaine du Colorado "University of Colorado, USA" en **psychologie scolaire**. Ayant une vaste expérience dans le système éducatif grec et allemand, elle dispose de tous les outils pour accompagner les enfants et adolescents dans leurs difficultés pendant les années scolaires.
-
-Elle est la spécialiste idéale pour la **Première Session Parentale** avec notre Clinique, l'**Examen et Psychothérapie des enfants et adolescents** et leurs parents en **Conseil Parental**.
-
-La psychologue clinique pour enfants parle **couramment le grec et l'allemand**.`
-      },
-      {
         id: 3,
         name: 'Eirini Stergiou',
         image: eiriniPhoto,
@@ -339,9 +291,9 @@ La psychologue parle **couramment le grec et l'anglais**.`
     ]
   };
 
-  const CAROUSEL_ORDER = [1, 4, 5, 2, 3];
+  const CAROUSEL_ORDER = [1, 4, 5, 3];
   // Μέλη με διαθέσιμα πτυχία/πιστοποιήσεις προς προβολή
-  const MEMBERS_WITH_CERTIFICATES = new Set<number>([1, 2, 3, 4, 5]);
+  const MEMBERS_WITH_CERTIFICATES = new Set<number>([1, 3, 4, 5]);
   const members = CAROUSEL_ORDER.map((id) => teamMembers[lang].find((m) => m.id === id)!);
   const memberCount = members.length;
 

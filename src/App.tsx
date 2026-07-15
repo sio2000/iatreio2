@@ -16,7 +16,6 @@ import Auth from './pages/Auth';
 import UserPanel from './pages/UserPanel';
 import EiriniPanel from './components/EiriniPanel';
 import IoannaPanel from './components/IoannaPanel';
-import SofiaPanel from './components/SofiaPanel';
 import MariaPanel from './components/MariaPanel';
 import NikiPanel from './components/NikiPanel';
 import PaymentSuccessPopup from './components/PaymentSuccessPopup';
@@ -73,8 +72,6 @@ function App() {
       setCurrentPage('eirini');
     } else if (path === '/ioanna' || path === '/ioanna/') {
       setCurrentPage('ioanna');
-    } else if (path === '/sofia' || path === '/sofia/') {
-      setCurrentPage('sofia');
     } else if (path === '/maria' || path === '/maria/') {
       setCurrentPage('maria');
     } else if (path === '/niki' || path === '/niki/') {
@@ -112,8 +109,6 @@ function App() {
         return <ProtectedPanel identityKey="eirini" language={language} onExit={() => setCurrentPage('home')} render={(onLogout) => <EiriniPanel language={language} onLogout={onLogout} />} />;
       case 'ioanna':
         return <ProtectedPanel identityKey="ioanna" language={language} onExit={() => setCurrentPage('home')} render={(onLogout) => <IoannaPanel language={language} onLogout={onLogout} />} />;
-      case 'sofia':
-        return <ProtectedPanel identityKey="sofia" language={language} onExit={() => setCurrentPage('home')} render={(onLogout) => <SofiaPanel language={language} onLogout={onLogout} />} />;
       case 'maria':
         return <ProtectedPanel identityKey="maria" language={language} onExit={() => setCurrentPage('home')} render={(onLogout) => <MariaPanel language={language} onLogout={onLogout} />} />;
       case 'niki':

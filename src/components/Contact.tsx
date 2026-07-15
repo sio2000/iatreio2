@@ -9,7 +9,7 @@ import StripeCheckout from './StripeCheckout';
 import { getLocalizedClosureReason } from '../utils/closureReason';
 import { createRealStripeCheckout } from '../lib/stripe-checkout';
 
-const RESTRICTED_DOCTOR_NAMES = new Set(['Ιωάννα Πισσάρη', 'Σοφία Σπυριάδου']);
+const RESTRICTED_DOCTOR_NAMES = new Set(['Ιωάννα Πισσάρη']);
 const THREE_HOUR_LIMIT_MINUTES = 3 * 60;
 
 const isSlotWithinThreeHours = (date: string, time: string, timezone: string, referenceNow?: Date) => {
@@ -156,7 +156,6 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
       const nameMap: { [key: string]: string } = {
         'Δρ. Άννα Μαρία Φύτρου': 'Dr. Anna-Maria Fytrou',
         'Dr. Άννα Μαρία Φύτρου': 'Dr. Anna-Maria Fytrou', // Alternative format
-        'Σοφία Σπυριάδου': 'Sofia Spyriadou',
         'Ιωάννα Πισσάρη': 'Ioanna Pissari',
         'Ειρήνη Στεργίου': 'Eirini Stergiou',
         'Μαρία Κ. Δημητριάδου': 'Maria K. Dimitriadou',
@@ -178,7 +177,6 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
       const nameMap: { [key: string]: string } = {
         'Δρ. Άννα Μαρία Φύτρου': 'Dr. Anna-Maria Fytrou',
         'Dr. Άννα Μαρία Φύτρου': 'Dr. Anna-Maria Fytrou', // Alternative format
-        'Σοφία Σπυριάδου': 'Sofia Spyriadou',
         'Ιωάννα Πισσάρη': 'Ioanna Pissari',
         'Ειρήνη Στεργίου': 'Eirini Stergiou',
         'Μαρία Κ. Δημητριάδου': 'Maria K. Dimitriadou',
@@ -586,7 +584,7 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
       doctor: 'Ειδικός',
       selectDoctor: 'Επιλέξτε ειδικό',
       slotLegend: 'Διαθεσιμότητα: Πράσινο διαθέσιμο, Κόκκινο μη διαθέσιμο',
-      threeHourRestrictionMessage: 'Για τις συνεδρίες με τις κλινικές παιδοψυχολόγους Ιωάννα Πισσάρη και Σοφία Σπυριάδου μπορείτε να κλείσετε ραντεβού μέχρι 3 ώρες πριν την ώρα της συνεδρίας.',
+      threeHourRestrictionMessage: 'Για τις συνεδρίες με την κλινική παιδοψυχολόγο Ιωάννα Πισσάρη μπορείτε να κλείσετε ραντεβού μέχρι 3 ώρες πριν την ώρα της συνεδρίας.',
       threeHourRestrictionTooltip: 'Η κράτηση είναι διαθέσιμη μέχρι 3 ώρες πριν τη συνεδρία.',
       appointmentDatePlaceholder: 'Επιλέξτε την ημερομηνία που σας ενδιαφέρει',
       privacy: 'Κατανοώ ότι αυτή η φόρμα δεν είναι για επείγουσες καταστάσεις. Για άμεση βοήθεια, παρακαλώ επικοινωνήστε με τις υπηρεσίες έκτακτης ανάγκης ή πηγαίνετε στο πλησιέστερο τμήμα επειγόντων περιστατικών.',
@@ -705,7 +703,7 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
       doctor: 'Specialist',
       selectDoctor: 'Select specialist',
       slotLegend: 'Availability: Green available, Red unavailable',
-      threeHourRestrictionMessage: 'For sessions with clinical child psychologists Ioanna Pissari and Sofia Spyriadou you can book up to 3 hours before the session start time.',
+      threeHourRestrictionMessage: 'For sessions with clinical child psychologist Ioanna Pissari you can book up to 3 hours before the session start time.',
       threeHourRestrictionTooltip: 'Booking allowed up to 3 hours before the session.',
       appointmentDatePlaceholder: 'Select your preferred date',
       privacy: 'I understand that this form is not for emergency situations. For immediate help, please contact emergency services or go to your nearest emergency room.',
@@ -823,7 +821,7 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
       doctor: 'Spécialiste',
       selectDoctor: 'Sélectionnez un spécialiste',
       slotLegend: 'Disponibilité: Vert disponible, Rouge non disponible',
-      threeHourRestrictionMessage: 'Pour les séances avec les psychologues cliniciennes pour enfants Ioanna Pissari et Sofia Spyriadou, vous pouvez réserver jusqu\'à 3 heures avant l\'heure du rendez-vous.',
+      threeHourRestrictionMessage: 'Pour les séances avec la psychologue clinicienne pour enfants Ioanna Pissari, vous pouvez réserver jusqu\'à 3 heures avant l\'heure du rendez-vous.',
       threeHourRestrictionTooltip: 'Réservation possible jusqu\'à 3 heures avant la séance.',
       appointmentDatePlaceholder: 'Sélectionnez la date qui vous intéresse',
       privacy: 'Je comprends que ce formulaire n\'est pas pour les situations d\'urgence. Pour une aide immédiate, veuillez contacter les services d\'urgence ou aller au service d\'urgence le plus proche.',
@@ -906,19 +904,23 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
       const normalizeDoctorName = (name: string) => 
         name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
       
-      // Φιλτράρουμε doctors - αποκλείουμε τον Dr. 1EYRO
+      // Φιλτράρουμε doctors - αποκλείουμε τον Dr. 1EYRO και τη Σοφία Σπυριάδου
       const allowedDoctors = (doctorsData || []).filter((doctor: Doctor) => {
         // Αποκλεισμός Dr. 1EYRO (test entry)
-        const is1eyro = normalizeDoctorName(doctor.name || '').includes('1eyro') || 
+        const is1eyro = normalizeDoctorName(doctor.name || '').includes('1eyro') ||
                        doctor.id === '48b3e29c-496c-421e-8d14-f7a89ded452a';
         if (is1eyro) return false;
-        
+
+        // Αποκλεισμός Σοφίας Σπυριάδου (δεν συνεργάζεται πλέον με το ιατρείο)
+        const normalizedName = normalizeDoctorName(doctor.name || '');
+        if (normalizedName.includes('σπυριαδου') || normalizedName.includes('spyriadou')) return false;
+
         // Μόνο active doctors
         return doctor.active === true;
       });
 
       // Ταξινόμηση για την κατηγορία «Κλινική Παιδοψυχολόγος & Ψυχοθεραπεύτρια»:
-      // 1) Μαρία Κ. Δημητριάδου, 2) Ιωάννα Πισσάρη, 3) Σοφία Σπυριάδου, μετά οι υπόλοιποι αλφαβητικά.
+      // 1) Μαρία Κ. Δημητριάδου, 2) Ιωάννα Πισσάρη, μετά οι υπόλοιποι αλφαβητικά.
       const sortedDoctors = allowedDoctors.sort((a: Doctor, b: Doctor) => {
         const nameA = normalizeDoctorName(a.name || '');
         const nameB = normalizeDoctorName(b.name || '');
@@ -927,18 +929,15 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
         const isMariaB = nameB.includes('δημητριαδου') || nameB.includes('dimitriadou');
         const isIoannaA = nameA.includes('ιωαννα') || nameA.includes('pissari');
         const isIoannaB = nameB.includes('ιωαννα') || nameB.includes('pissari');
-        const isSofiaA = nameA.includes('σοφια') || nameA.includes('spyriadou');
-        const isSofiaB = nameB.includes('σοφια') || nameB.includes('spyriadou');
 
-        const rank = (isMaria: boolean, isIoanna: boolean, isSofia: boolean) => {
+        const rank = (isMaria: boolean, isIoanna: boolean) => {
           if (isMaria) return 0;
           if (isIoanna) return 1;
-          if (isSofia) return 2;
-          return 3;
+          return 2;
         };
 
-        const rankA = rank(isMariaA, isIoannaA, isSofiaA);
-        const rankB = rank(isMariaB, isIoannaB, isSofiaB);
+        const rankA = rank(isMariaA, isIoannaA);
+        const rankB = rank(isMariaB, isIoannaB);
 
         if (rankA !== rankB) return rankA - rankB;
 
