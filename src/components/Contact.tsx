@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, MapPin, Clock, Calendar, Shield, Heart, Send, Instagram, Facebook, X, Clock3, CreditCard, Loader2 } from 'lucide-react';
-import profile2 from '../assets/profile2.JPG';
+import contactImage from '../assets/newimageiatreio.png';
 import { supabase } from '../lib/supabase';
 import { AdminSettings, Doctor, SlotInfo } from '../types/appointments';
 import { getUserTimezone, toDateString, getCurrentDateInTimezone, convertTimeToTimezone, getDoctorTimezone } from '../lib/timezone';
@@ -1498,14 +1498,14 @@ const Contact: React.FC<ContactProps> = ({ language, prefill, onlyForm }) => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.02 }}
-                className="flex-shrink-0 overflow-hidden shadow-xl"
+                className="flex-shrink-0 overflow-hidden shadow-xl rounded-3xl"
               >
                 <img 
-                  src={profile2} 
-                  alt={language === 'gr' ? 'Φωτογραφία ιατρού' : 
-                    language === 'en' ? 'Doctor profile' : 
-                    'Photo du médecin'} 
-                  className="w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 object-cover"
+                  src={contactImage} 
+                  alt={language === 'gr' ? 'Φωτογραφία επικοινωνίας' : 
+                    language === 'en' ? 'Contact image' : 
+                    'Image de contact'} 
+                  className="w-full h-auto max-w-[20rem] md:max-w-[18rem] lg:max-w-[20rem] object-contain"
                 />
               </motion.div>
               <motion.div
