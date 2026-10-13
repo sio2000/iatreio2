@@ -17,7 +17,7 @@ import eiriniPhoto from '../assets/Eirini_Stergiou.jpg';
 import mariaPhoto from '../assets/Μαρία Κ. Δημητριάδου.jpg';
 // Νίκη Τσιμπίδη: φωτογραφία & πτυχία από τον φάκελο public/ (σερβίρονται από τη ρίζα)
 const nikiPhoto = '/nikiprofile.jpg';
-const nikiCertificates = ['/ptixio1.png', '/ptixio2.png', '/ptixio3.png', '/pdfptixio.pdf', '/pdfptixio2.pdf'];
+const nikiCertificates = ['/ptixio1.png', '/ptixio2.png', '/ptixio3.png', '/nikitsimpidi.png', '/pdfptixio.pdf', '/pdfptixio2.pdf'];
 
 interface TeamMembersProps {
   language: string;
